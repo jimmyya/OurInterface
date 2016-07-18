@@ -1,0 +1,1 @@
+!function(){$("#login_form").bind("submit",function(n){var a=$.md5,r=$("#user_name"),u=$("#user_password");return r.val(a(r.val())),u.val(a(u.val())),!0})}();
