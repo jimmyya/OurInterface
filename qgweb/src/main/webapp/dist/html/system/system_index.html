@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>接口系统主页</title>
+    <link href="http://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/dist/css/system_index.css" />
+</head>
+
+<body>
+    <div id="header" class="subwrapper">
+        <h1>Welcome to our interface system</h1>
+    </div>
+        <div id="add" class="subwrapper"><a href="/dist/html/system/add_system.html">新系统</a></div>
+        <ul id="system_container" class="subwrapper">
+            <li>
+                <h3>八种创建等高列布局</h3>
+                <p>高度相等列在Web页面设计中永远是一个网页设计师的需求。如果所有列都有相同的背景色，高度相等还是不相等都无关紧要，因为你只要在这些列的父元素中设置一个背景色就可以了。但是，如果一</p>
+                <a href="#"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-trash" aria-hidden="true"></i></a>
+            </li>
+            <li>
+                <h3>八种创建等高列布局</h3>
+                <p>高度相等列在Web页面设计中永远是一个网页设计师的需求。如果所有列都有相同的背景色，高度相等还是不相等都无关紧要，因为你只要在这些列的父元素中设置一个背景色就可以了。但是，如果一个或多个列需要单独设置自己的背景色，那么它的视觉完整性的设计就显得非常重要了。大家都知道当初Table实现等高列布局是多么的简单，但是我们使用CSS来创建等高列布局并非是那么容易的事情。</p>
+                <a href="#"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-trash" aria-hidden="true"></i></a>
+            </li>
+             <li>
+                <h3>八种创建等高列布局</h3>
+                <p>高度相等列在Web页面设计中永远是一个网页设计师的需求。如果所有列都有相同的背景色，高度相等还是不相等都无关紧要，因为你只要在这些列的父元素中设置一个背景色就可以了。但是，如果一个或多个列需要单独设置自己的背景色，那么它的视觉完整性的设计就显得非常重要了。大家都知道当初Table实现等高列布局是多么的简单，但是我们使用CSS来创建等高列布局并非是那么容易的事情。</p>
+                <a href="#"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-trash" aria-hidden="true"></i></a>
+            </li>
+
+             <li>
+                <h3>八种创建等高列布局</h3>
+                <p>高度相等列在Web页面设计中永远是一个网页设计师的需求。如果所有列都有相同的背景色，高度相等还是不相等都无关紧要，因为你只要在这些列的父元素中设置一个背景色就可以了。但是，如果一个或多个列需要单独设置自己的背景色，那么它的视觉完整性的设计就显得非常重要了。大家都知道当初Table实现等高列布局是多么的简单，但是我们使用CSS来创建等高列布局并非是那么容易的事情。</p>
+                <a href="#"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-trash" aria-hidden="true"></i></a>
+            </li>
+             <li>
+                <h3>八种创建等高列布局</h3>
+                <p>高度相等列在Web页面设计中永远是一个网页设计师的需求。如果所有列都有相同的背景色，高度相等还是不相等都无关紧要，因为你只要在这些列的父元素中设置一个背景色就可以了。但是，如果一个或多个列需要单独设置自己的背景色，那么它的视觉完整性的设计就显得非常重要了。大家都知道当初Table实现等高列布局是多么的简单，但是我们使用CSS来创建等高列布局并非是那么容易的事情。</p>
+                <a href="#"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-trash" aria-hidden="true"></i></a>
+            </li>
+             <li>
+                <h3>八种创建等高列布局</h3>
+                <p>高度相等列在Web页面设计中永远是一个网页设计师的需求。如果所有列都有相同的背景色，高度相等还是不相等都无关紧要，因为你只要在这些列的父元素中设置一个背景色就可以了。但是，如果一个或多个列需要单独设置自己的背景色，那么它的视觉完整性的设计就显得非常重要了。大家都知道当初Table实现等高列布局是多么的简单，但是我们使用CSS来创建等高列布局并非是那么容易的事情。</p>
+                <a href="#"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-trash" aria-hidden="true"></i></a>
+            </li>
+        </ul>
+    <script src="https://cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+    <script>
+        (function ($){
+            function info(str){
+                console.info(str);
+            }
+            // 从后台获取数据
+            debugger;
+            $.ajax({
+                dataType: 'json',
+                type: 'get',
+                url: '/system/all',
+                contentType:'application/json',
+                success: function (data) {
+                    var str = '';
+                    data = data.result;
+                    if(data.result.status === 2000){
+                        for(var i = 0 len = data.data.length; i < len; i++){
+                            str = '<li>'
+                                + '<h3><a href="/system/'+ data.data[i].id + '/get">' + data.data[i].name + '</a></h3>'
+                                + '<p>' + data.data[i].description + '</p>'
+                                + '<i class="fa fa-trash" aria-hidden="true"></i>'
+                                + '</li>';
+                                };
+                        $('#system_container').append(str);
+                    }else{
+                        info('[system error]没有获取到数据');
+                    }
+                },
+                error: function (data) {
+                    info("错误");
+                }
+            });
+            // 删除数据
+            $('.fa-trash').click(function (event) {
+                $.ajax({
+                    data: '',
+                    type: 'get',
+                    url: '/system/delete',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    success: function(data) {
+                        info(data);
+                        $(event.target).parents('li').css('display: none;');
+                    },
+                    error: function(data){
+                        info(data);
+                    }
+                });
+            });
+        })($);
+    </script>
+</body>
+
+</html>

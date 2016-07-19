@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>添加新系统</title>
+</head>
+<body>
+    <div class="wrapper" id="login">
+        <form action="/system/add" id="system_form"  autocomplete="off" method="post">
+            <input type="text" style="display:none;">
+            <label>系统名称
+            </label>
+                <input type="text" name="system_name" id="system_name" placeholder="Your name"/>
+            <label>系统描述
+            </label>
+                <textarea id="user_password"></textarea>
+            <button type="submit" id="system_submit" >login</button>
+        </form>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+</body>
+</html>

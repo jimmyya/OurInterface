@@ -14,26 +14,13 @@
         }
     });
     // submit event
-    $("#login_submit").click(function (event) {
+    $("#login_form").bind('submit',function (event) {
         debugger;
         var md5 = $.md5;
         var user_name = md5($('#user_name').val());
         var user_password =md5($('user_password').val());
-        var data = {
-            user_name: user_name,
-            user_password: user_password,
-            salt: salt.salt
-        }
-        $.ajax({
-            data: JSON.stringify(data),
-            dataType: 'json',
-            url : '/user/login',
-            type: 'post',
-            success: function(data){
-
-            },
-            error: function(data){
-
-            }
-        });
+        $('#user_name').val(user_name);
+        $('#user_password').val(user_password);
+        $('#salt').val(salt.salt);
+        event.target.submit();
     });
