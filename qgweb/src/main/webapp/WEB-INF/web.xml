@@ -5,7 +5,7 @@
          version="3.1"
          metadata-complete="true">
   <servlet>
-    <servlet-name>seckill-dispatcher</servlet-name>
+    <servlet-name>interface-dispatcher</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     <!--配置springmvc 需要加载的配置文件
     spring-dao.xml,spring-service.xml，spring-web.xml
@@ -17,7 +17,7 @@
     </init-param>
   </servlet>
   <servlet-mapping>
-    <servlet-name>seckill-dispatcher</servlet-name>
+    <servlet-name>interface-dispatcher</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
 </web-app>
