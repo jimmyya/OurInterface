@@ -19,11 +19,13 @@ import java.util.Map;
 @RequestMapping("/salt")
 public class SaltController {
 
+
     @RequestMapping(value = "/login/get", method = RequestMethod.GET)
     @ResponseBody
     public Map<String,String> getLoginSalt() {
         String salt = "#!32%#%^%4*3w5";
         Map<String,String> saltMap=new HashMap<String, String>();
+        saltMap.put("salt",salt);
         return saltMap;
     }
 
