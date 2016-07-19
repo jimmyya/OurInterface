@@ -32,7 +32,7 @@ public class SaltController {
      * @param users 用户对象
      * @return json信息
      */
-    @RequestMapping(value = "saveUser", method = RequestMethod.POST)
+    @RequestMapping(value = "/saveUser", method = RequestMethod.POST)
     @ResponseBody
     public Map<String,String> saveUser(@RequestBody List<User> users) {
         System.out.println("获得传值");

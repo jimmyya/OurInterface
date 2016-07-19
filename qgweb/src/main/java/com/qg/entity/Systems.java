@@ -9,6 +9,21 @@ public class Systems {
     private String name;
     private String description;
 
+    public Systems() {
+        super();
+    }
+
+    public Systems(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
+    public Systems(int id, String name, String description) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+    }
+
     public int getId() {
         return id;
     }

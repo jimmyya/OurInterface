@@ -40,4 +40,14 @@ public class User {
     public void setPowerLimit(int powerLimit) {
         this.powerLimit = powerLimit;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", powerLimit=" + powerLimit +
+                '}';
+    }
 }

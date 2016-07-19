@@ -4,6 +4,7 @@ import com.qg.dto.Results;
 import com.qg.entity.Interfaces;
 import com.sun.org.apache.bcel.internal.generic.RETURN;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -37,7 +38,7 @@ public class InterfaceController {
      * （Message：附加信息）
      */
     @RequestMapping(value="/{interfaceId}/delete",method= RequestMethod.GET)
-    public Results<Interfaces> deleteInterfaceById(int interfaceId){
+    public Results<Interfaces> deleteInterfaceById(@PathVariable("interfaceId") int interfaceId){
         return null;
     }
 

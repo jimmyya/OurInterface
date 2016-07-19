@@ -4,4 +4,45 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qg.dao.InterfaceDao">
 
+    <select id="queryBySystemId" resultType="Interfaces">
+        select  id,name,url
+        form t_interface
+        where system_id =#{systemId}
+    </select>
+
+    <select id="queryByInterfacesId" resultType="Interfaces">
+        select id,name,url
+        from t_interface
+        where id=#{interfaceId}
+    </select>
+
+    <select id="queryByInterfacesName" resultType="Interfaces">
+        select id,name,url
+        from t_interface
+        where name like '%${interfacesName}%'
+    </select>
+
+    <select id="queryByInterfacesUrl" resultType="Interfaces">
+        select id,name,url
+        from t_interface
+        where url=#{interfacesUrl}
+    </select>
+
+
+    <delete id="deleteBySystemId">
+        delete from t_interface
+        where system_id = #{systemId}
+    </delete>
+
+    <delete id="deleteByInterfacesId">
+        delete from t_interface
+        where id = #{interfacesId}
+    </delete>
+
+    <insert id="insertInterfaces" parameterType="Interfaces">
+        insert into t_interface (name,url,format,request_method,power_limit,author,description,request_result,system_id);
+        values (interfaces.name,interfaces.url,interfaces.format,interfaces.request_method,interfaces.power_limit,
+        interfaces.author,interfaces.description,interfaces.request_result,interfaces.system_id)
+    </insert>
+
 </mapper>

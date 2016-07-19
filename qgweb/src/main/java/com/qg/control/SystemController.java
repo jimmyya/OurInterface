@@ -1,12 +1,22 @@
 package com.qg.control;
 
 import com.qg.dto.Results;
+import com.qg.entity.Interfaces;
 import com.qg.entity.Systems;
+import com.qg.service.InterfaceService;
+import com.qg.service.SystemService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import static javafx.scene.input.KeyCode.R;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by CHEN on 2016/7/18.
@@ -16,14 +26,33 @@ import static javafx.scene.input.KeyCode.R;
 @RequestMapping("/system")
 public class SystemController {
 
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    private SystemService systemService;
+
+    @Autowired
+    private InterfaceService interfaceService;
+
     /**
      * 查询并返回所有的系统页面
-     * @return 返回页面
+     * @return 200 获得成功 500 服务器异常
      */
-    @RequestMapping(value="/getAll",method= RequestMethod.GET)
-    public String getAllSystem() {
-        String returnResult="";
-        return returnResult;
+    @RequestMapping(value="/all",method= RequestMethod.GET)
+    @ResponseBody
+    public Map<String,Object> getAllSystem() {
+        System.out.println("获得所有系统");
+        Map<String,Object> systemMap=new HashMap<String, Object>();
+        Results<List<Systems>> result=new Results<List<Systems>>();
+        List<Systems> systemses=systemService.getAllSystems();//获得对象
+        if(systemses!=null) {
+            result.setStatus(200);
+            result.setData(systemses);
+        } else {
+            result.setStatus(500);
+        }
+        systemMap.put("result",result);
+        return systemMap;
     }
 
     /**
@@ -32,10 +61,23 @@ public class SystemController {
      * @return 返回页面
      */
     @RequestMapping(value="/{systemId}/get",method=RequestMethod.GET)
-    public String getSystemById(int systemId) {
+    public String getSystemById(@PathVariable("systemId")int systemId) {
         String returnResult="";
+        //获得所有的接口
+        List<Interfaces> interfaceses=interfaceService.queryBySystemId(systemId);
+
+
+
         return returnResult;
     }
+
+
+    public String insertSystem(String name,String description) {
+        String resultReturn="";
+        Systems systems=new Systems();
+        return resultReturn;
+    }
+
 
     /**
      * 修改系统的信息
@@ -62,6 +104,4 @@ public class SystemController {
     public Results<Systems> deleteSystemById(int systemId){
         return null;
     }
-
-
 }

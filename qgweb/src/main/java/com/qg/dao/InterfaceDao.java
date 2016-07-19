@@ -2,6 +2,8 @@ package com.qg.dao;
 
 import com.qg.entity.Interfaces;
 
+import java.util.List;
+
 /**
  * Created by CHEN on 2016/7/17.
  */
@@ -11,7 +13,7 @@ public interface InterfaceDao {
      * @param systemId  系统的Id
      * @return Interfaces(id,name,url)
      */
-    Interfaces queryBySystemId(int systemId);
+    List<Interfaces> queryBySystemId(int systemId);
 
     /**
      * 根据接口的Id 查询接口的详情
@@ -47,5 +49,12 @@ public interface InterfaceDao {
      * @return false 失败 true 成功
      */
     boolean deleteByInterfacesId(int interfacesId);
+
+    /**
+     * 增加接口
+     * @param interfaces  接口
+     * @return false 失败 true 成功
+     */
+    boolean insertInterfaces(Interfaces interfaces);
 
 }

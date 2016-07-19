@@ -3,5 +3,12 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qg.dao.SystemDao">
+    <select id="queryAll" resultType="Systems">
+      SELECT * FROM t_system
+    </select>
 
+    <insert id="insertSystem" parameterType="Systems">
+        insert t_system (name,description)
+        values (system.name,system.description)
+    </insert>
 </mapper>
