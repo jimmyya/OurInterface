@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>添加接口</title>
+    <script src="http://tinymce.cachefly.net/4.0/tinymce.min.js"></script>
+    <script>
+    tinymce.init({
+        selector: 'textarea'
+    });
+    </script>
+</head>
+
+<body>
+    <form id="itf_form" action="" methob="post">
+        <label for="itf_name">接口名称</label>
+        <input type="text" name="itf_name" id="itf_name" />
+        <label for="itf_name_zh_cn">接口解释</label>
+        <input type="text" name="itf_name_zh_cn" id="itf_name_zh_cn" />
+        <label for="">action URL</label>
+        <input type="text" name="itf_url" id="itf_url" />
+        <label for="">需要权限</label>
+        <input type="text" name="itf_power" id="itf_power" />
+        <label for="">HTTP请求方式</label>
+        <select name="itf_type" id="itf_type">
+            <option value="POST">POST</option>
+            <option value="GET">GET</option>
+        </select>
+        <label for="">访问授权限制</label>
+        <input type="text" />
+        <fieldset>
+            <lagend>请求参数</lagend>
+            <label for="">参数名称</label>
+            <input type="text" name="itf_arg_name" />
+            <select name="itf_type">
+                <option value="POST">POST</option>
+                <option value="GET">GET</option>
+            </select>
+            <label for="">类型</label>
+            <input type="text" name="itf_arg_type" />
+            <label for="">说明</label>
+            <input type="text" name="itf_arg_explain" />
+        </fieldset>
+        <label for="">返回结果</label>
+        <textarea name="" id="" cols="30" rows="10"></textarea>
+        <button type="reset">重置</button>
+        <button type="submit">提交</button>
+    </form>
+</body>
+
+</html>
