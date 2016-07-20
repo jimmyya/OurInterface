@@ -54,10 +54,36 @@
         </ul>
     <script src="https://cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
     <script>
+        function delectSystem(event){
+            var num = $(event.target).prevAll("h3").children('a').attr('href').split('/')[2];
+            $.ajax({
+                data: '',
+                type: 'get',
+                url: '/system/' + num + '/delete',
+                dataType: 'json',
+                contentType: 'application/json',
+                success: function(data) {
+                    info(data);
+                    if(data.status === 400){
+                        $(event.target).parents('li').css('display: none;');
+                    }else{
+                        alert(data.message);
+                    }
+                },
+                error: function(data){
+                     info("[system error]/system/delete错误");
+                }
+            });
+        }
+        function tumpItfPage(event){
+            var num = $(event.target).attr('href').split('/')[2];
+        }
+        
+        function info(str){
+            console.info(str);
+        }
         (function ($){
-            function info(str){
-                console.info(str);
-            }
+           
             // 从后台获取数据
             debugger;
             $.ajax({
@@ -68,39 +94,34 @@
                 success: function (data) {
                     var str = '';
                     data = data.result;
-                    if(data.result.status === 2000){
-                        for(var i = 0 len = data.data.length; i < len; i++){
+                    if(data.status === 200){
+                        data = data.data;
+                        for(var i = 0,len = data.length; i < len; i++){
                             str = '<li>'
-                                + '<h3><a href="/system/'+ data.data[i].id + '/get">' + data.data[i].name + '</a></h3>'
-                                + '<p>' + data.data[i].description + '</p>'
+                                + '<h3><a class="system_href" href="/system/'+ data[i].id + '/get">' + data[i].name + '</a></h3>'
+                                + '<p>' + data[i].description + '</p>'
+                                + '<a href="#"><i class="fa fa-pencil" aria-hidden="true"></i>'
                                 + '<i class="fa fa-trash" aria-hidden="true"></i>'
                                 + '</li>';
-                                };
-                        $('#system_container').append(str);
+                                }
+
+                        $(str).appendTo('#system_container').find('.fa-trash').click(function (event) {
+                            delectSystem(event);
+                        });
+                        $(str).find('.system_href').click(function (event) ){
+                            tumpItfPage(event);
+                        }
                     }else{
                         info('[system error]没有获取到数据');
                     }
                 },
                 error: function (data) {
-                    info("错误");
+                    info("[system error]/system/all错误");
                 }
             });
             // 删除数据
             $('.fa-trash').click(function (event) {
-                $.ajax({
-                    data: '',
-                    type: 'get',
-                    url: '/system/delete',
-                    dataType: 'json',
-                    contentType: 'application/json',
-                    success: function(data) {
-                        info(data);
-                        $(event.target).parents('li').css('display: none;');
-                    },
-                    error: function(data){
-                        info(data);
-                    }
-                });
+                delectSystem(event);
             });
         })($);
     </script>
