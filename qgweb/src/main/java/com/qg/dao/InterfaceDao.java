@@ -55,6 +55,14 @@ public interface InterfaceDao {
      * @param interfaces  接口
      * @return false 失败 true 成功
      */
-    boolean insertInterfaces(Interfaces interfaces);
+    boolean insertInterface(Interfaces interfaces);
+
+    /**
+     * 修改接口
+     * 增加接口
+     * @param interfaces  接口
+     * @return
+     */
+    boolean modifyInterface(Interfaces interfaces);
 
 }

@@ -2,12 +2,16 @@ package com.qg.control;
 
 import com.qg.dto.Results;
 import com.qg.entity.Interfaces;
+import com.qg.service.InterfaceService;
 import com.sun.org.apache.bcel.internal.generic.RETURN;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
+import static javafx.scene.input.KeyCode.R;
 import static javafx.scene.input.KeyCode.T;
 
 /**
@@ -17,10 +21,13 @@ import static javafx.scene.input.KeyCode.T;
 @RequestMapping("/interfaces")
 public class InterfaceController {
 
+    @Autowired
+    private InterfaceService interfaceService;
+
     /**
      * 根据接口Id返回接口详情
      * @param interfaceId 接口Id
-     * @return 接口的结果包 （status:400成功 505失败）
+     * @return 接口的结果包 （status:2000成功 505失败）
      * （Interfaces:interfaceId,name,url,format, requestMethod, powerLimit,
     author,description,requestResult）
      * （Message：附加信息）
@@ -33,13 +40,19 @@ public class InterfaceController {
     /**
      * 根据接口Id删除接口详情
      * @param interfaceId 接口Id
-     * @return 接口的结果包 （status:400成功 505失败）
+     * @return 接口的结果包 （status:2000成功 5000失败）
      * （System:null，判断返回status，成功则删除信息，失败填上原来的数据）
      * （Message：附加信息）
      */
     @RequestMapping(value="/{interfaceId}/delete",method= RequestMethod.GET)
     public Results<Interfaces> deleteInterfaceById(@PathVariable("interfaceId") int interfaceId){
-        return null;
+        Results<Interfaces> result;
+        if(interfaceService.deleteInterfaceById(interfaceId)) {
+            result=new Results<Interfaces>(2000);
+        } else {
+            result=new Results<Interfaces>(5000);
+        }
+        return result;
     }
 
     /**
@@ -53,14 +66,22 @@ public class InterfaceController {
      * @param author  作者
      * @param description  描述
      * @param requestResult  请求结果
-     * @return 接口的结果包 （status:400成功 505失败）
+     * @return 接口的结果包 （status:2000成功 5000失败）
      * （System:null，判断返回status，成功则把填入字符直接填上，失败填上原来的数据）
      * （Message：附加信息）
      */
     @RequestMapping(value="/modify",method= RequestMethod.POST)
-    public Results<Interfaces> modifyInterfaceById(int interfaceId,String name,
+    public Results<Interfaces> modifyInterfaceById(int id,int interfaceId,String name,
            String url,String format, String requestMethod,String powerLimit,
             String author,String description,String requestResult){
-        return null;
+        Results<Interfaces> result;
+        Interfaces interfaces=new Interfaces(id,name,url,format,requestMethod,powerLimit,
+                author,description,requestResult);
+        if(interfaceService.modifyInterface(interfaces)) {
+            result=new Results<Interfaces>(2000);
+        } else {
+            result=new Results<Interfaces>(5000);
+        }
+        return result;
     }
 }

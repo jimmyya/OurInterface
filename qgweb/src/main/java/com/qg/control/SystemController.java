@@ -65,19 +65,26 @@ public class SystemController {
         String returnResult="";
         //获得所有的接口
         List<Interfaces> interfaceses=interfaceService.queryBySystemId(systemId);
-
-
-
         return returnResult;
     }
 
-
+    /**
+     * 增加一个
+     * @param name 系统名
+     * @param description  系统描述
+     * @return
+     */
+    @RequestMapping(value="/insert",method=RequestMethod.POST)
     public String insertSystem(String name,String description) {
         String resultReturn="";
-        Systems systems=new Systems();
+        Systems system=new Systems(name,description);
+       if(systemService.insertSystem(system)) {
+            resultReturn="";
+        } else {
+            resultReturn="";
+        }
         return resultReturn;
     }
-
 
     /**
      * 修改系统的信息

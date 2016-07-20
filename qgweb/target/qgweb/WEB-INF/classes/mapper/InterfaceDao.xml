@@ -41,8 +41,8 @@
 
     <insert id="insertInterfaces" parameterType="Interfaces">
         insert into t_interface (name,url,format,request_method,power_limit,author,description,request_result,system_id);
-        values (interfaces.name,interfaces.url,interfaces.format,interfaces.request_method,interfaces.power_limit,
-        interfaces.author,interfaces.description,interfaces.request_result,interfaces.system_id)
+        values (#{name},#{url},#{format},#{request_method},#{power_limit},
+        #{author},#{description},#{request_result},#{system_id})
     </insert>
 
 </mapper>

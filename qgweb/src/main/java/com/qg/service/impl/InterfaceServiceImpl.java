@@ -23,4 +23,19 @@ public class InterfaceServiceImpl implements InterfaceService{
     public List<Interfaces> queryByInterfaceName(String interfaceName) {
         return null;
     }
+
+
+
+    public boolean deleteInterfaceById(int interfaceId) {
+        return interfaceDao.deleteByInterfacesId(interfaceId);
+    }
+
+    public boolean modifyInterface(Interfaces interfaces) {
+        return interfaceDao.modifyInterface(interfaces);
+    }
+
+    public boolean insertInterface(Interfaces interfaces) {
+        return interfaceDao.insertInterface(interfaces);
+    }
+
 }
