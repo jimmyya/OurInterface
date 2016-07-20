@@ -24,10 +24,10 @@ public interface SystemDao {
 
     /**
      * 增加一个系统
-     * @param systems 系统详情
+     * @param system 系统详情
      * @return  false 失败 true 成功
      */
-    boolean insertSystem(Systems systems);
+    boolean insertSystem(Systems system);
 
     /**
      * 根据

@@ -21,8 +21,8 @@ public class SystemServiceImpl implements SystemService{
         return systemDao.queryAll();
     }
 
-    public boolean insertSystem(Systems systems) {
-        return systemDao.insertSystem(systems);
+    public boolean insertSystem(Systems system) {
+        return systemDao.insertSystem(system);
     }
 
     public boolean deleteSystem(int systemId) {

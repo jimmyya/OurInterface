@@ -9,6 +9,6 @@
 
     <insert id="insertSystem" parameterType="Systems">
         insert t_system (name,description)
-        values (system.name,system.description)
+        values (#{name},#{description})
     </insert>
 </mapper>

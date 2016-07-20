@@ -13,4 +13,9 @@ public interface InterfaceService {
 
     List<Interfaces> queryByInterfaceName(String interfaceName);
 
+    boolean deleteInterfaceById(int interfaceId);
+
+    boolean modifyInterface(Interfaces interfaces);
+
+    boolean insertInterface(Interfaces interfaces);
 }

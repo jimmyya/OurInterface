@@ -18,7 +18,7 @@ public interface SystemService {
      * @param systems 系统详情
      * @return false 失败 true 成功
      */
-    boolean insertSystem(Systems systems);
+    boolean insertSystem(Systems system);
 
     /**
      * 删除系统详情

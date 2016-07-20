@@ -16,6 +16,37 @@ public class Interfaces {
     private int systemId;  //系统Id
     private Fields fields; //字段对象
 
+
+    public Interfaces(int id, String name, String url, String format,
+                      String requestMethod, String powerLimit,
+                      String author, String description,
+                      String requestResult) {
+        this.id = id;
+        this.name = name;
+        this.url = url;
+        this.format = format;
+        this.requestMethod = requestMethod;
+        this.powerLimit = powerLimit;
+        this.author = author;
+        this.description = description;
+        this.requestResult = requestResult;
+    }
+
+    public Interfaces(String name, String url, String format,
+                      String requestMethod, String powerLimit,
+                      String author, String description,
+                      String requestResult, int systemId) {
+        this.name = name;
+        this.url = url;
+        this.format = format;
+        this.requestMethod = requestMethod;
+        this.powerLimit = powerLimit;
+        this.author = author;
+        this.description = description;
+        this.requestResult = requestResult;
+        this.systemId = systemId;
+    }
+
     public int getId() {
         return id;
     }
