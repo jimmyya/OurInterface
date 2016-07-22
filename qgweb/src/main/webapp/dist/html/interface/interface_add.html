@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>添加接口</title>
+    <link rel="stylesheet" href="../../css/add_interface.css" />
+    <!-- <script src="http://cdn.tinymce.com/4/tinymce.min.js"></script> -->
+    <!-- <script>
+    tinymce.init({
+        selector: 'textarea'
+    });
+    </script> -->
+</head>
+
+<body>
+<h1>添加接口</h1>
+    <form id="itf_form" class="subwrapper" action="" methob="post">
+        <div class="fl">
+            <label for="itf_name">接口名称</label>
+            <input type="text" name="itf_name" id="itf_name" />
+            <label for="itf_name_zh_cn">接口解释</label>
+            <input type="text" name="itf_name_zh_cn" id="itf_name_zh_cn" />
+            <label for="itf_url">action URL</label>
+            <input type="text" name="itf_url" id="itf_url" />
+        </div>  
+        <div class="fr">
+            <label for="itf_power">需要权限</label>
+            <input type="text" name="itf_power" id="itf_power" />
+            <label for="itf_type">HTTP请求方式</label>
+            <select name="itf_type" id="itf_type">
+                <option value="POST">POST</option>
+                <option value="GET">GET</option>
+            </select>
+            <label for="">访问授权限制</label>
+            <input type="text" />
+        </div>
+        <fieldset id="set_arg">
+            <lagend>请求参数</lagend>
+            <button type="button" id="itf_add">添加接口</button>
+             <button type="button" id="itf_del">删除接口</button>
+        </fieldset>
+        <label id="itf_lb_return" for="itf_return">返回结果</label>
+        <textarea name="itf_return" id="itf_return" cols="30" rows="10"></textarea>
+            <button type="submit" id="submit">提交</button>
+    </form>
+    <script>
+        if(typeof sessionStorage.system_id === 'undefined'){
+            sessionStorage.system_id = 0;
+        }
+        var add_system =  {
+            system_id: sessionStorage.system_id,
+            add_num: function(){
+                var _this = this;
+                var input = null;
+                if(typeof this.system_id !== 'undefined'){
+                    input = document.createElement('input');
+                    input.setAttribute('type', 'hidden');
+                    input.setAttribute('name', 'system_id');
+                    input.setAttribute('value', _this.system_id);
+                    document.getElementById('itf_form').appendChild(input);
+                }
+            }
+        };
+        add_system.add_num();
+        add_system = null;
+        var clourse = {
+                num: 0, // 当前号数
+                // 渲染多个怎么办
+                renderStr: function(_this){
+                    var num = _this.num;
+                    var str = '';
+                    var ele = document.createElement('div');
+                    ele.setAttribute('id','itf_arg_'+ num);
+                    str = '<label for="itf_arg_name_' + num +'">参数名称</label>'
+                        + '<input type="text" name="itf_arg_name" id="itf_arg_name_' + num +'"/>'
+                        + '<label for="itf_type_' + num +'">是否可选</label>'
+                        + '<select name="itf_type" id="itf_type_' + num +'">'
+                            + '<option value="true">必选</option>'
+                            + '<option value="false">可选</option>'
+                        + '</select>'
+                        + '<label for="itf_arg_type_' + num +'">类型</label>'
+                        + '<input type="text" name="itf_arg_type" id="itf_arg_type_' + num +'" />'
+                        + '<label for="itf_arg_explain_' + num +'">说明</label>'
+                        + '<input type="text" name="itf_arg_explain" id="itf_arg_explain_' + num +'" />';
+                    ele.innerHTML = str;
+                    _this.num++;
+                    return ele;
+                },
+            add_arg: function(_this){
+                ele = _this.renderStr(_this);
+                document.getElementById('set_arg').appendChild(ele);
+                console.log(_this.num);
+            },
+            // 写一个函数删除参数接口
+            del_arg: function(_this){
+                if(_this.num > 0){
+                    _this.num--;
+                }
+                var temp = 'itf_arg_' + _this.num;
+                var ele = document.getElementById(temp);
+                if(ele){
+                    ele.parentNode.removeChild(ele);
+                    console.log(_this.num);
+                }
+            },
+            init: function(){
+                var _this = this;
+                var add_button = document.getElementById('itf_add');
+                var del_button = document.getElementById('itf_del');
+                if(add_button){
+                    add_button.addEventListener('click', function(event){
+                        _this.add_arg(_this,event);
+                    });
+                }
+                if(del_button){
+                    del_button.addEventListener('click', function(event){
+                        _this.del_arg(_this,event);
+                    });
+                }
+            }
+        };
+
+        clourse.init();
+        
+    </script>
+</body>
+
+</html>

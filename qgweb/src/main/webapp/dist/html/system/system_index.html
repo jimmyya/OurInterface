@@ -14,43 +14,6 @@
     </div>
         <div id="add" class="subwrapper"><a href="/dist/html/system/add_system.html">新系统</a></div>
         <ul id="system_container" class="subwrapper">
-            <li>
-                <h3>八种创建等高列布局</h3>
-                <p>高度相等列在Web页面设计中永远是一个网页设计师的需求。如果所有列都有相同的背景色，高度相等还是不相等都无关紧要，因为你只要在这些列的父元素中设置一个背景色就可以了。但是，如果一</p>
-                <a href="#"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-trash" aria-hidden="true"></i></a>
-            </li>
-            <li>
-                <h3>八种创建等高列布局</h3>
-                <p>高度相等列在Web页面设计中永远是一个网页设计师的需求。如果所有列都有相同的背景色，高度相等还是不相等都无关紧要，因为你只要在这些列的父元素中设置一个背景色就可以了。但是，如果一个或多个列需要单独设置自己的背景色，那么它的视觉完整性的设计就显得非常重要了。大家都知道当初Table实现等高列布局是多么的简单，但是我们使用CSS来创建等高列布局并非是那么容易的事情。</p>
-                <a href="#"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-trash" aria-hidden="true"></i></a>
-            </li>
-             <li>
-                <h3>八种创建等高列布局</h3>
-                <p>高度相等列在Web页面设计中永远是一个网页设计师的需求。如果所有列都有相同的背景色，高度相等还是不相等都无关紧要，因为你只要在这些列的父元素中设置一个背景色就可以了。但是，如果一个或多个列需要单独设置自己的背景色，那么它的视觉完整性的设计就显得非常重要了。大家都知道当初Table实现等高列布局是多么的简单，但是我们使用CSS来创建等高列布局并非是那么容易的事情。</p>
-                <a href="#"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-trash" aria-hidden="true"></i></a>
-            </li>
-
-             <li>
-                <h3>八种创建等高列布局</h3>
-                <p>高度相等列在Web页面设计中永远是一个网页设计师的需求。如果所有列都有相同的背景色，高度相等还是不相等都无关紧要，因为你只要在这些列的父元素中设置一个背景色就可以了。但是，如果一个或多个列需要单独设置自己的背景色，那么它的视觉完整性的设计就显得非常重要了。大家都知道当初Table实现等高列布局是多么的简单，但是我们使用CSS来创建等高列布局并非是那么容易的事情。</p>
-                <a href="#"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-trash" aria-hidden="true"></i></a>
-            </li>
-             <li>
-                <h3>八种创建等高列布局</h3>
-                <p>高度相等列在Web页面设计中永远是一个网页设计师的需求。如果所有列都有相同的背景色，高度相等还是不相等都无关紧要，因为你只要在这些列的父元素中设置一个背景色就可以了。但是，如果一个或多个列需要单独设置自己的背景色，那么它的视觉完整性的设计就显得非常重要了。大家都知道当初Table实现等高列布局是多么的简单，但是我们使用CSS来创建等高列布局并非是那么容易的事情。</p>
-                <a href="#"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-trash" aria-hidden="true"></i></a>
-            </li>
-             <li>
-                <h3>八种创建等高列布局</h3>
-                <p>高度相等列在Web页面设计中永远是一个网页设计师的需求。如果所有列都有相同的背景色，高度相等还是不相等都无关紧要，因为你只要在这些列的父元素中设置一个背景色就可以了。但是，如果一个或多个列需要单独设置自己的背景色，那么它的视觉完整性的设计就显得非常重要了。大家都知道当初Table实现等高列布局是多么的简单，但是我们使用CSS来创建等高列布局并非是那么容易的事情。</p>
-                <a href="#"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-trash" aria-hidden="true"></i></a>
-            </li>
         </ul>
     <script src="https://cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
     <script>
@@ -75,8 +38,13 @@
                 }
             });
         }
+
         function tumpItfPage(event){
             var num = $(event.target).attr('href').split('/')[2];
+            // 将号码放进客户端存储里面
+            locaStrorage.setItem("system_id", num);
+
+
         }
         
         function info(str){
