@@ -1,0 +1,77 @@
+body {
+    margin: 0;
+    height: 1px;
+    min-width: 550px;
+    font-family: '微软雅黑';
+    background: #b3a2a2;
+}
+
+.subwrapper {
+    padding: 0 calc( 50% - 550px);
+}
+
+#header{
+    background: #655;
+}
+
+h1 {
+    margin: 0;
+    text-align: center;
+    padding: 50px 0;
+    color: wheat;
+    font-family: cursive;
+    background: #655;
+}
+
+#system_container{
+    overflow: hidden;
+    margin: 60px auto;
+    font-family: '幼圆';
+    line-height: 1.5em;
+    color: #4d4343;
+}
+#system_container h3 a{
+    overflow: hidden;
+    margin: 0;
+    color: #4d4343;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-decoration: none;
+    font-size: 20px;
+}
+#system_container p{
+    height: 9em;
+    overflow-wrap: break-word;
+    overflow-y: hidden;   
+    position: relative; 
+}
+#system_container  li{
+    float: left;
+    width: 32%;
+    border-radius: 37px;
+    padding: 3.5%;
+    box-sizing: border-box;
+    list-style: none;
+    background: white;
+    margin-right: 2%;
+    margin-bottom: 40px;
+}
+
+#system_container li:nth-of-type(3n){
+    margin-right: 0;
+}
+#system_container  i{
+    float: right;
+    cursor: pointer;
+}
+.fa{
+    font-size: 30px;
+    color: #655;
+    transition: all 0.5s;
+    margin-left: 20px;;
+}
+
+.fa:hover{
+    color: #421c1c;
+    transform: scale(1.5);
+}

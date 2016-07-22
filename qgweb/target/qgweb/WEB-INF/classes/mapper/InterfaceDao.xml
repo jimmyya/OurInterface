@@ -45,4 +45,17 @@
         #{author},#{description},#{request_result},#{system_id})
     </insert>
 
+    <update id="modifyInterface" parameterType="Interfaces">
+        update t_interface
+        set
+        name=#{name},
+        url=#{url},
+        format=#{format},
+        request_method=#{requestMethod},
+        power_limit=#{powerLimit},
+        author=#{author},
+        description=#{description},
+        request_result=#{requestResult}
+        where id=#{id};
+    </update>
 </mapper>

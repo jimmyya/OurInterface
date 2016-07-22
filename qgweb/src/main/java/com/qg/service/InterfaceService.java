@@ -13,6 +13,8 @@ public interface InterfaceService {
 
     List<Interfaces> queryByInterfaceName(String interfaceName);
 
+    Interfaces queryByInterfaceId(int interfaceId);
+
     boolean deleteInterfaceById(int interfaceId);
 
     boolean modifyInterface(Interfaces interfaces);

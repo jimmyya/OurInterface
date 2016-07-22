@@ -8,6 +8,10 @@ public class Message {
     private int status;
     private String message;
 
+    public Message(int status) {
+        this.status = status;
+    }
+
     public Message(int status, String message) {
         this.status = status;
         this.message = message;

@@ -27,7 +27,7 @@ public interface InterfaceDao {
      * @param interfacesName  接口名字
      * @return Interfaces(id,name,url)
      */
-    Interfaces queryByInterfacesName(String interfacesName);
+    List<Interfaces> queryByInterfacesName(String interfacesName);
 
     /**
      * 根据接口的URL进行模糊查询

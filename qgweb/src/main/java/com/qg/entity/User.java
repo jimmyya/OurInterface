@@ -4,7 +4,7 @@ package com.qg.entity;
  * Created by CHEN on 2016/7/17.
  */
 public class User {
-    private int id;
+    private int userId;
     private String username;
     private String password;
     private int powerLimit;
@@ -17,19 +17,19 @@ public class User {
         this.username = username;
     }
 
-    public User(int id, String username, String password, int powerLimit) {
-        this.id = id;
+    public User(int userId, String username, String password, int powerLimit) {
+        this.userId = userId;
         this.username = username;
         this.password = password;
         this.powerLimit = powerLimit;
     }
 
-    public int getId() {
-        return id;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getUsername() {
@@ -56,13 +56,5 @@ public class User {
         this.powerLimit = powerLimit;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", powerLimit=" + powerLimit +
-                '}';
-    }
+
 }

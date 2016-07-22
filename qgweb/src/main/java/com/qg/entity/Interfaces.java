@@ -4,119 +4,114 @@ package com.qg.entity;
  * Created by CHEN on 2016/7/17.
  */
 public class Interfaces {
-    private int id;  //id
-    private String name;  //接口名
-    private String url;  //接口URL
-    private String format;  //支持的格式
-    private String requestMethod;  //请求的方式
-    private String powerLimit;  //权限
-    private String author;  //作者
-    private String description;  //描述
-    private String requestResult;  //返回的结果
+    private int interfaceId;  //id
+    private String interfaceName;  //接口名
+    private String interfaceUrl;  //接口URL
+    private String interfaceFormat;  //支持的格式
+    private String interfaceRequestMethod;  //请求的方式
+    private String interfacePowerLimit;  //权限
+    private String interfaceAuthor;  //作者
+    private String interfaceDescription;  //描述
+    private String interfaceRequestResult;  //返回的结果
     private int systemId;  //系统Id
     private Fields fields; //字段对象
 
 
-    public Interfaces(int id, String name, String url, String format,
-                      String requestMethod, String powerLimit,
-                      String author, String description,
-                      String requestResult) {
-        this.id = id;
-        this.name = name;
-        this.url = url;
-        this.format = format;
-        this.requestMethod = requestMethod;
-        this.powerLimit = powerLimit;
-        this.author = author;
-        this.description = description;
-        this.requestResult = requestResult;
+    public Interfaces(int interfaceId, String interfaceName, String interfaceUrl, String interfaceFormat, String interfaceRequestMethod, String interfacePowerLimit, String interfaceAuthor, String interfaceDescription, String interfaceRequestResult) {
+        this.interfaceId = interfaceId;
+        this.interfaceName = interfaceName;
+        this.interfaceUrl = interfaceUrl;
+        this.interfaceFormat = interfaceFormat;
+        this.interfaceRequestMethod = interfaceRequestMethod;
+        this.interfacePowerLimit = interfacePowerLimit;
+        this.interfaceAuthor = interfaceAuthor;
+        this.interfaceDescription = interfaceDescription;
+        this.interfaceRequestResult = interfaceRequestResult;
     }
 
-    public Interfaces(String name, String url, String format,
-                      String requestMethod, String powerLimit,
-                      String author, String description,
-                      String requestResult, int systemId) {
-        this.name = name;
-        this.url = url;
-        this.format = format;
-        this.requestMethod = requestMethod;
-        this.powerLimit = powerLimit;
-        this.author = author;
-        this.description = description;
-        this.requestResult = requestResult;
+    public Interfaces(int interfaceId, String interfaceName, String interfaceUrl, String interfaceFormat, String interfaceRequestMethod, String interfacePowerLimit, String interfaceAuthor, String interfaceDescription, String interfaceRequestResult, int systemId) {
+        this.interfaceId = interfaceId;
+        this.interfaceName = interfaceName;
+        this.interfaceUrl = interfaceUrl;
+        this.interfaceFormat = interfaceFormat;
+        this.interfaceRequestMethod = interfaceRequestMethod;
+        this.interfacePowerLimit = interfacePowerLimit;
+        this.interfaceAuthor = interfaceAuthor;
+        this.interfaceDescription = interfaceDescription;
+        this.interfaceRequestResult = interfaceRequestResult;
         this.systemId = systemId;
     }
 
-    public int getId() {
-        return id;
+    public int getInterfaceId() {
+        return interfaceId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setInterfaceId(int interfaceId) {
+        this.interfaceId = interfaceId;
     }
 
-    public String getName() {
-        return name;
+    public String getInterfaceName() {
+        return interfaceName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setInterfaceName(String interfaceName) {
+        this.interfaceName = interfaceName;
     }
 
-    public String getUrl() {
-        return url;
+    public String getInterfaceUrl() {
+        return interfaceUrl;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setInterfaceUrl(String interfaceUrl) {
+        this.interfaceUrl = interfaceUrl;
     }
 
-    public String getFormat() {
-        return format;
+    public String getInterfaceFormat() {
+        return interfaceFormat;
     }
 
-    public void setFormat(String format) {
-        this.format = format;
+    public void setInterfaceFormat(String interfaceFormat) {
+        this.interfaceFormat = interfaceFormat;
     }
 
-    public String getRequestMethod() {
-        return requestMethod;
+    public String getInterfaceRequestMethod() {
+        return interfaceRequestMethod;
     }
 
-    public void setRequestMethod(String requestMethod) {
-        this.requestMethod = requestMethod;
+    public void setInterfaceRequestMethod(String interfaceRequestMethod) {
+        this.interfaceRequestMethod = interfaceRequestMethod;
     }
 
-    public String getPowerLimit() {
-        return powerLimit;
+    public String getInterfacePowerLimit() {
+        return interfacePowerLimit;
     }
 
-    public void setPowerLimit(String powerLimit) {
-        this.powerLimit = powerLimit;
+    public void setInterfacePowerLimit(String interfacePowerLimit) {
+        this.interfacePowerLimit = interfacePowerLimit;
     }
 
-    public String getAuthor() {
-        return author;
+    public String getInterfaceAuthor() {
+        return interfaceAuthor;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setInterfaceAuthor(String interfaceAuthor) {
+        this.interfaceAuthor = interfaceAuthor;
     }
 
-    public String getDescription() {
-        return description;
+    public String getInterfaceDescription() {
+        return interfaceDescription;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setInterfaceDescription(String interfaceDescription) {
+        this.interfaceDescription = interfaceDescription;
     }
 
-    public String getRequestResult() {
-        return requestResult;
+    public String getInterfaceRequestResult() {
+        return interfaceRequestResult;
     }
 
-    public void setRequestResult(String requestResult) {
-        this.requestResult = requestResult;
+    public void setInterfaceRequestResult(String interfaceRequestResult) {
+        this.interfaceRequestResult = interfaceRequestResult;
     }
 
     public int getSystemId() {

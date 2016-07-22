@@ -4,4 +4,30 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qg.dao.FieldDao">
 
+    <select id="queryByInterfaceId" resultType="Fields">
+        select *
+        from t_field
+        where id=#{interfaceId}
+    </select>
+
+    <update id="modifyField" parameterType="Fields">
+        update t_field
+        set
+          name=#{name},
+          attribute=#{attribute},
+          description=#{description},
+          default=#{default},
+          explain=#{explain}
+        where
+          id=#{id}
+    </update>
+    <delete id="deleteByFieldId">
+        delete from t_field
+        where id=#{fieldId}
+    </delete>
+
+    <insert id="insertField" parameterType="Fields">
+        insert into t_field (id,name,attribute,description,default_value,explain,interface_id)
+        values (#{id},#{name},#{attribute},#{description},#{default_value},#{explain},#{interface_id})
+    </insert>
 </mapper>

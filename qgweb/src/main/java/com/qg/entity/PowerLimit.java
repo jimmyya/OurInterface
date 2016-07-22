@@ -7,8 +7,8 @@ package com.qg.entity;
  * Aller ：全权限者
  */
 public class PowerLimit {
-    public static final int USER=1;
-    public static final int ADDER=2;
-    public static final int ALLER=3;
+    public static final int USER = 1;
+    public static final int ADDER = 2;
+    public static final int ALLER = 3;
 
 }

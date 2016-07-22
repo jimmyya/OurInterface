@@ -21,10 +21,12 @@ public class InterfaceServiceImpl implements InterfaceService{
     }
 
     public List<Interfaces> queryByInterfaceName(String interfaceName) {
-        return null;
+        return interfaceDao.queryByInterfacesName(interfaceName);
     }
 
-
+    public Interfaces queryByInterfaceId(int interfaceId) {
+        return interfaceDao.queryByInterfacesId(interfaceId);
+    }
 
     public boolean deleteInterfaceById(int interfaceId) {
         return interfaceDao.deleteByInterfacesId(interfaceId);

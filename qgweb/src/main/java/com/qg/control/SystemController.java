@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,7 +44,7 @@ public class SystemController {
      * 查询并返回所有的系统页面
      * @return 200 获得成功 500 服务器异常
      */
-    @RequestMapping(value="/all",method= RequestMethod.GET)
+    @RequestMapping(value="/allsystem",method= RequestMethod.GET)
     @ResponseBody
     public Map<String,Object> getAllSystem() {
         System.out.println("获得所有系统");
@@ -66,11 +67,39 @@ public class SystemController {
      * @return 返回页面
      */
     @RequestMapping(value="/{systemId}",method=RequestMethod.GET)
-    public String getSystemById(@PathVariable("systemId")int systemId) {
-        String returnResult="";
-        //获得所有的接口
-        List<Interfaces> interfaceses=interfaceService.queryBySystemId(systemId);
-        return returnResult;
+    public String getSystemById(@PathVariable("systemId")int systemId,HttpSession session) {
+        session.setAttribute("systemId",systemId);
+        return "/interface/interface_index";
+    }
+
+    /**
+     *
+     * @return systemId
+     */
+    @RequestMapping(value="/systemId",method=RequestMethod.GET)
+    @ResponseBody
+    public Map<String,Integer> getSystemId(HttpSession session) {
+        Map<String,Integer> idMap=new HashMap<String, Integer>();
+        idMap.put("systemId",(Integer)session.getAttribute("systemId"));
+        return idMap;
+    }
+
+    @RequestMapping(value="/{systemId}/allInterface",method=RequestMethod.GET)
+    @ResponseBody
+    public Map<String,Results<List<Interfaces>>> queryBySystemId(@PathVariable("systemId")int systemId) {
+        Map<String,Results<List<Interfaces>>> listMap=new HashMap<String, Results<List<Interfaces>>>();
+        Results<List<Interfaces>> listResults=new Results<List<Interfaces>>();
+        //获得所有的接口名字和id和url
+        List<Interfaces> interfaceList=interfaceService.queryBySystemId(systemId);
+        if(interfaceList.size()>0) {
+            listResults.setData(interfaceList);
+            listResults.setStatus(Status.SUCCESS);
+        } else {
+            listResults.setStatus(Status.ERROR);
+            listResults.setMessage("该系统尚未定制接口");
+        }
+        listMap.put("result",listResults);
+        return listMap;
     }
 
     /**
@@ -79,7 +108,7 @@ public class SystemController {
      * @param description  系统描述
      * @return
      */
-    @RequestMapping(value="/{systemId}",method=RequestMethod.POST)
+    @RequestMapping(value="/system",method=RequestMethod.POST)
     public String insertSystem(String name,String description) {
         String resultReturn="/system/system_index";
         Systems system=new Systems(name,description);

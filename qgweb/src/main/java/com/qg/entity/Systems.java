@@ -5,47 +5,46 @@ package com.qg.entity;
  */
 public class Systems {
 
-    private int id;
-    private String name;
-    private String description;
+    private int systemId;
+    private String systemName;
+    private String systemDescription;
 
     public Systems() {
         super();
     }
 
-    public Systems(String name, String description) {
-        this.name = name;
-        this.description = description;
+    public Systems(String systemName, String systemDescription) {
+        this.systemName = systemName;
+        this.systemDescription = systemDescription;
     }
 
-    public Systems(int id, String name, String description) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
+    public Systems(int systemId, String systemName, String systemDescription) {
+        this.systemId = systemId;
+        this.systemName = systemName;
+        this.systemDescription = systemDescription;
     }
 
-
-    public int getId() {
-        return id;
+    public int getSystemId() {
+        return systemId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setSystemId(int systemId) {
+        this.systemId = systemId;
     }
 
-    public String getName() {
-        return name;
+    public String getSystemName() {
+        return systemName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setSystemName(String systemName) {
+        this.systemName = systemName;
     }
 
-    public String getDescription() {
-        return description;
+    public String getSystemDescription() {
+        return systemDescription;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setSystemDescription(String systemDescription) {
+        this.systemDescription = systemDescription;
     }
 }

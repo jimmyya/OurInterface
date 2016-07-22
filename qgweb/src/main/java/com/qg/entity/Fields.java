@@ -4,60 +4,60 @@ package com.qg.entity;
  * Created by CHEN on 2016/7/17.
  */
 public class Fields {
-    private int id;
-    private String name;  //
-    private String attribute;  //属性
-    private String description;  //描述
-    private String defaultValue;  //默认值
-    private String explain;  //说明
+    private int fieldId;
+    private String fieldName;  //
+    private String fieldAttribute;  //属性
+    private String fieldDescription;  //描述
+    private String fieldFefaultValue;  //默认值
+    private String fieldExplain;  //说明
     private int interfaceId;  //接口Id
 
-    public int getId() {
-        return id;
+    public int getFieldId() {
+        return fieldId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setFieldId(int fieldId) {
+        this.fieldId = fieldId;
     }
 
-    public String getName() {
-        return name;
+    public String getFieldName() {
+        return fieldName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFieldName(String fieldName) {
+        this.fieldName = fieldName;
     }
 
-    public String getAttribute() {
-        return attribute;
+    public String getFieldAttribute() {
+        return fieldAttribute;
     }
 
-    public void setAttribute(String attribute) {
-        this.attribute = attribute;
+    public void setFieldAttribute(String fieldAttribute) {
+        this.fieldAttribute = fieldAttribute;
     }
 
-    public String getDescription() {
-        return description;
+    public String getFieldDescription() {
+        return fieldDescription;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setFieldDescription(String fieldDescription) {
+        this.fieldDescription = fieldDescription;
     }
 
-    public String getDefaultValue() {
-        return defaultValue;
+    public String getFieldFefaultValue() {
+        return fieldFefaultValue;
     }
 
-    public void setDefaultValue(String defaultValue) {
-        this.defaultValue = defaultValue;
+    public void setFieldFefaultValue(String fieldFefaultValue) {
+        this.fieldFefaultValue = fieldFefaultValue;
     }
 
-    public String getExplain() {
-        return explain;
+    public String getFieldExplain() {
+        return fieldExplain;
     }
 
-    public void setExplain(String explain) {
-        this.explain = explain;
+    public void setFieldExplain(String fieldExplain) {
+        this.fieldExplain = fieldExplain;
     }
 
     public int getInterfaceId() {
