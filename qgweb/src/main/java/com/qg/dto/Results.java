@@ -3,11 +3,6 @@ package com.qg.dto;
 /**
  * Created by CHEN on 2016/7/18.
  * 返回的json结果包
- * 状态码     约定
- * 2000      成功
- * 5000      失败
- * 5001      账号密码错误
- * 5002      没有该用户
  */
 public class Results<T> {
     private int status;

@@ -1,16 +1,20 @@
 package com.qg.control;
 
+import com.qg.dto.Message;
 import com.qg.dto.Results;
+import com.qg.dto.Status;
 import com.qg.entity.Interfaces;
 import com.qg.service.InterfaceService;
 import com.sun.org.apache.bcel.internal.generic.RETURN;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
+import static javafx.scene.input.KeyCode.M;
 import static javafx.scene.input.KeyCode.R;
 import static javafx.scene.input.KeyCode.T;
 
@@ -32,7 +36,7 @@ public class InterfaceController {
     author,description,requestResult）
      * （Message：附加信息）
      */
-    @RequestMapping(value="/{interfaceId}/get",method= RequestMethod.GET)
+    @RequestMapping(value="/{interfaceId}",method= RequestMethod.GET)
     public Results<Interfaces> getInterfaceById(int interfaceId) {
         return null;
     }
@@ -44,44 +48,37 @@ public class InterfaceController {
      * （System:null，判断返回status，成功则删除信息，失败填上原来的数据）
      * （Message：附加信息）
      */
-    @RequestMapping(value="/{interfaceId}/delete",method= RequestMethod.GET)
-    public Results<Interfaces> deleteInterfaceById(@PathVariable("interfaceId") int interfaceId){
-        Results<Interfaces> result;
+    @RequestMapping(value="/{interfaceId}",method= RequestMethod.DELETE)
+    public Map<String,Integer> deleteInterfaceById(@PathVariable("interfaceId") int interfaceId){
+        Map<String,Integer> statusMap=new HashMap<String, Integer>();
         if(interfaceService.deleteInterfaceById(interfaceId)) {
-            result=new Results<Interfaces>(2000);
+           statusMap.put("status",Status.SUCCESS);
         } else {
-            result=new Results<Interfaces>(5000);
+           statusMap.put("status",Status.ERROR);
         }
-        return result;
+        return statusMap;
+    }
+
+    @RequestMapping(value="/{interfaceId}",method=RequestMethod.PUT)
+    public String modifyInterfaceById(@PathVariable("interfaceId") int interfaceId) {
+        return "";
     }
 
     /**
      * 根据 接口Id 修改接口
-     * @param interfaceId 接口Id
-     * @param name 接口名
-     * @param url  接口路径
-     * @param format 请求格式
-     * @param requestMethod  请求方式
-     * @param powerLimit  权限
-     * @param author  作者
-     * @param description  描述
-     * @param requestResult  请求结果
      * @return 接口的结果包 （status:2000成功 5000失败）
      * （System:null，判断返回status，成功则把填入字符直接填上，失败填上原来的数据）
      * （Message：附加信息）
      */
-    @RequestMapping(value="/modify",method= RequestMethod.POST)
-    public Results<Interfaces> modifyInterfaceById(int id,int interfaceId,String name,
-           String url,String format, String requestMethod,String powerLimit,
-            String author,String description,String requestResult){
-        Results<Interfaces> result;
-        Interfaces interfaces=new Interfaces(id,name,url,format,requestMethod,powerLimit,
-                author,description,requestResult);
+    @RequestMapping(value="//modify",method= RequestMethod.POST)
+    @ResponseBody
+    public Map<String,Integer> modifyInterface(@RequestBody Interfaces interfaces){
+        Map<String,Integer> statusMap=new HashMap<String, Integer>();
         if(interfaceService.modifyInterface(interfaces)) {
-            result=new Results<Interfaces>(2000);
+            statusMap.put("status", Status.SUCCESS);
         } else {
-            result=new Results<Interfaces>(5000);
+            statusMap.put("status",Status.ERROR);
         }
-        return result;
+        return statusMap;
     }
 }

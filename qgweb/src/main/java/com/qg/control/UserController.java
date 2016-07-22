@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
+
 import static com.sun.xml.internal.ws.api.message.Packet.Status.Response;
 
 /**
@@ -34,13 +36,15 @@ public class UserController {
      * @return 结果页面
      */
     @RequestMapping(value="/login",method= RequestMethod.POST)
-    public String userLogin(@RequestParam("user_name") String username, @RequestParam("user_password") String password, Model model) {
+    public String userLogin(@RequestParam("user_name") String username, @RequestParam("user_password") String password, HttpSession session, Model model) {
         System.out.println("执行登陆");
         String returnResult="/user/login";//返回的页面
         User user=userService.queryByPassword(username,password);//查找用户
         if(user!=null) {
-            model.addAttribute("user",user);
-            returnResult="/index";
+            user.setPassword("");//置空密码
+            model.addAttribute("user",new User(username));//返回给前端的对象
+            session.setAttribute("user",user);//把整个user存到session中
+            returnResult="/system/system_index";
          }
         return returnResult;
     }

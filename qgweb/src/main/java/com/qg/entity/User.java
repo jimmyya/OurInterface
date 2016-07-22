@@ -9,6 +9,21 @@ public class User {
     private String password;
     private int powerLimit;
 
+    public User() {
+        super();
+    }
+
+    public User(String username) {
+        this.username = username;
+    }
+
+    public User(int id, String username, String password, int powerLimit) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.powerLimit = powerLimit;
+    }
+
     public int getId() {
         return id;
     }
