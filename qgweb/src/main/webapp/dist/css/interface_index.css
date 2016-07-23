@@ -1,0 +1,12 @@
+body{
+    margin: 0;
+}
+
+.body_full{
+    width: 100%;
+    min-width: 1000px;
+}
+
+.sidebar{
+    width: 300px;
+}

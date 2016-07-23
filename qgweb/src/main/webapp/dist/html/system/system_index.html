@@ -5,7 +5,12 @@
     <meta charset="UTF-8" />
     <title>接口系统主页</title>
     <link href="http://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/dist/css/system_index.css" />
+    <!-- <link rel="stylesheet" href="/dist/css/system_index.css" /> -->
+    <link rel="stylesheet" href="../../css/system_index.css" />
+
+    <script src="https://cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+    <!-- <script src="http://mockjs.com/dist/mock.js"></script> -->
+    <script src="../../js/mock.js"></script>
 </head>
 
 <body>
@@ -15,84 +20,7 @@
         <div id="add" class="subwrapper"><a href="/dist/html/system/add_system.html">新系统</a></div>
         <ul id="system_container" class="subwrapper">
         </ul>
-    <script src="https://cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
-    <script>
-        function delectSystem(event){
-            var num = $(event.target).prevAll("h3").children('a').attr('href').split('/')[2];
-            $.ajax({
-                data: '',
-                type: 'get',
-                url: '/system/' + num + '/delete',
-                dataType: 'json',
-                contentType: 'application/json',
-                success: function(data) {
-                    info(data);
-                    if(data.status === 400){
-                        $(event.target).parents('li').css('display: none;');
-                    }else{
-                        alert(data.message);
-                    }
-                },
-                error: function(data){
-                     info("[system error]/system/delete错误");
-                }
-            });
-        }
-
-        function tumpItfPage(event){
-            var num = $(event.target).attr('href').split('/')[2];
-            // 将号码放进客户端存储里面
-            locaStrorage.setItem("system_id", num);
-
-
-        }
-        
-        function info(str){
-            console.info(str);
-        }
-        (function ($){
-           
-            // 从后台获取数据
-            debugger;
-            $.ajax({
-                dataType: 'json',
-                type: 'get',
-                url: '/system/all',
-                contentType:'application/json',
-                success: function (data) {
-                    var str = '';
-                    data = data.result;
-                    if(data.status === 200){
-                        data = data.data;
-                        for(var i = 0,len = data.length; i < len; i++){
-                            str = '<li>'
-                                + '<h3><a class="system_href" href="/system/'+ data[i].id + '/get">' + data[i].name + '</a></h3>'
-                                + '<p>' + data[i].description + '</p>'
-                                + '<a href="#"><i class="fa fa-pencil" aria-hidden="true"></i>'
-                                + '<i class="fa fa-trash" aria-hidden="true"></i>'
-                                + '</li>';
-                                }
-
-                        $(str).appendTo('#system_container').find('.fa-trash').click(function (event) {
-                            delectSystem(event);
-                        });
-                        $(str).find('.system_href').click(function (event) ){
-                            tumpItfPage(event);
-                        }
-                    }else{
-                        info('[system error]没有获取到数据');
-                    }
-                },
-                error: function (data) {
-                    info("[system error]/system/all错误");
-                }
-            });
-            // 删除数据
-            $('.fa-trash').click(function (event) {
-                delectSystem(event);
-            });
-        })($);
-    </script>
+    <script src="../../js/system_index.js"></script>
 </body>
 
 </html>
