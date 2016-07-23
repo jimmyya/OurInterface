@@ -9,6 +9,7 @@ import com.qg.entity.Systems;
 import com.qg.entity.User;
 import com.qg.service.InterfaceService;
 import com.qg.service.SystemService;
+import com.qg.utils.MySizeChecker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +61,7 @@ public class SystemController {
      * ｝
      * @return
      */
-    @RequestMapping(value="/allsystem",method= RequestMethod.GET)
+    @RequestMapping(value="/all_system",method= RequestMethod.GET)
     @ResponseBody
     public Map<String, Results<List<Systems>>> getAllSystem(HttpSession session) {
         User user=(User)session.getAttribute("user");
@@ -89,7 +90,7 @@ public class SystemController {
         session.setAttribute("systemId",systemId);
         return "/interface/interface_index";
     }*/
-    @RequestMapping(value="/{systemId}",method=RequestMethod.GET)
+    @RequestMapping(value="/{system_id}",method=RequestMethod.GET)
     public String getSystemById(@PathVariable("systemId")int systemId) {
         return "/interface/interface_index";
     }
@@ -149,9 +150,10 @@ public class SystemController {
     public Map<String,Integer> insertSystem(@RequestBody Systems systems,HttpSession session) {
         User user=(User)session.getAttribute("user");
         Map<String,Integer> statusMap=new HashMap<String, Integer>();
+        MySizeChecker<Systems> mySizeChecker=new MySizeChecker<Systems>();
         if(PowerLimit.ADDER<user.getPowerLimit()) {
             //权限允许
-            if(systemService.insertSystem(systems)) {//插入成功
+            if(mySizeChecker.checkSize(systems)&&systemService.insertSystem(systems)) {//插入成功
                 statusMap.put("status",Status.SUCCESS);
             } else {
                 statusMap.put("status",Status.ERROR);
@@ -172,15 +174,16 @@ public class SystemController {
      */
     @RequestMapping(value="/{uuid}/{systemId}",method=RequestMethod.PUT)
     @ResponseBody
-   public Map<String,Message> modifySystemById(@RequestBody Systems system, HttpSession session) {
+   public Map<String,Message> modifySystemById(@RequestBody Systems systems, HttpSession session) {
         Map<String,Message> messageMap=new HashMap<String, Message>();
         Message message;
         //判断权限
         User user = (User)session.getAttribute("user");
+        MySizeChecker<Systems> mySizeChecker=new MySizeChecker<Systems>();
         if(PowerLimit.ADDER<=user.getPowerLimit()) {
             //权限允许
             //在servlet层判断 哪一个是非空就修改哪个字段
-            if(systemService.modifySystem(system)) {
+            if(mySizeChecker.checkSize(systems)&&systemService.modifySystem(systems)) {
                 //成功修改
                 message=new Message(Status.SUCCESS,"插入成功");
             } else {

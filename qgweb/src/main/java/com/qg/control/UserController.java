@@ -3,6 +3,7 @@ package com.qg.control;
 import com.qg.entity.User;
 import com.qg.service.UserService;
 import com.qg.utils.MyMD5;
+import com.qg.utils.MySizeChecker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,19 +39,24 @@ public class UserController {
      */
     @RequestMapping(value="/login",method= RequestMethod.POST)
     public String userLogin(@RequestParam("user_name") String username, @RequestParam("user_password") String password, HttpSession session, HttpServletResponse response) {
-        String returnResult="/user/login";//返回的页面
-        User user=userService.queryByPassword(username, DigestUtils.md5DigestAsHex(password.getBytes()));//查找用户
-        Cookie cookie;
-        if(user!=null) {
-            cookie=new Cookie("user_cookie_id", MyMD5.getMD5(user.getUsername(), ""+Calendar.YEAR+Calendar.DAY_OF_MONTH));
-            cookie.setMaxAge(3600*24);//保存一天
-            cookie.setPath("/");
-            response.addCookie(cookie);
+        String returnResult = "/user/login";//返回的页面
+        if(username.length()>= MySizeChecker.USERNAME||password.length()>=MySizeChecker.PASSWORD) {
+            //字符值过大
 
-            session.setAttribute("userStatus","login");
-            session.setAttribute("user",user);//把整个user存到session中
-            returnResult="/system/system_index";
-         }
+        } else {
+            User user = userService.queryByPassword(username, MyMD5.getMD5(password));//查找用户
+            Cookie cookie;
+            if (user != null) {
+                cookie = new Cookie("user_cookie_id", MyMD5.getMD5(user.getUsername(), "" + Calendar.YEAR + Calendar.DAY_OF_MONTH));
+                cookie.setMaxAge(3600 * 24);//保存一天
+                cookie.setPath("/");
+                response.addCookie(cookie);
+
+                session.setAttribute("userStatus", "login");
+                session.setAttribute("user", user);//把整个user存到session中
+                returnResult = "/system/system_index";
+            }
+        }
         return returnResult;
     }
 }

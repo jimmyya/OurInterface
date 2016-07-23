@@ -8,6 +8,11 @@
     <listener-class>com.qg.listener.MySession</listener-class>
   </listener>-->
 
+  <error-page>
+    <error-code>404</error-code>
+    <location>/dist/html/error/error.html</location>
+  </error-page>
+
   <servlet-mapping>
     <servlet-name>default</servlet-name>
     <url-pattern>*.css</url-pattern>

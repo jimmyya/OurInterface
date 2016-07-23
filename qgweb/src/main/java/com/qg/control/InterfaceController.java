@@ -9,6 +9,7 @@ import com.qg.entity.PowerLimit;
 import com.qg.entity.User;
 import com.qg.service.FieldService;
 import com.qg.service.InterfaceService;
+import com.qg.utils.MySizeChecker;
 import com.sun.corba.se.spi.orbutil.fsm.Guard;
 import com.sun.deploy.nativesandbox.comm.Request;
 import com.sun.org.apache.bcel.internal.generic.RETURN;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.net.InetAddress;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -74,10 +76,12 @@ public class InterfaceController {
         Results<Interfaces> interfaceResult= new Results<Interfaces>();
         Results<List<Fields>> fieldResult=new Results<List<Fields>>();
         List<Fields> fieldList;
-        User user=(User)session.getAttribute("user");
-        Interfaces interfaces=interfaceService.queryByInterfaceId(interfaceId,user.getPowerLimit());
+
+
+        User user = (User) session.getAttribute("user");
+        Interfaces interfaces = interfaceService.queryByInterfaceId(interfaceId, user.getPowerLimit());
         interfaceResult.setPowerLimit(user.getPowerLimit());
-        if(interfaces==null) {
+        if (interfaces == null) {
             interfaceResult.setStatus(Status.ERROR);
             interfaceResult.setMessage("该接口不存在");
         } else {
@@ -85,8 +89,8 @@ public class InterfaceController {
             interfaceResult.setStatus(Status.SUCCESS);
             interfaceResult.setData(interfaces);
             //返回字段信息
-            fieldList=fieldService.queryByInterfaceId(interfaceId,user.getPowerLimit());
-            if(null==fieldList||fieldList.size()==0) {
+            fieldList = fieldService.queryByInterfaceId(interfaceId, user.getPowerLimit());
+            if (null == fieldList || fieldList.size() == 0) {
                 fieldResult.setStatus(Status.ERROR);
                 fieldResult.setMessage("字段为空");
             } else {
@@ -97,8 +101,8 @@ public class InterfaceController {
             fieldResult.setData(fieldList);
 
         }
-        interfaceMap.put("interfaceResult",interfaceResult);
-        interfaceMap.put("fieldResult",fieldResult);
+        interfaceMap.put("interfaceResult", interfaceResult);
+        interfaceMap.put("fieldResult", fieldResult);
         return interfaceMap;
     }
 
@@ -171,10 +175,12 @@ public class InterfaceController {
     public Map<String,Message> modifyInterface(@RequestBody Interfaces interfaces,HttpSession session) {
         Map<String,Message> messageMap=new HashMap<String, Message>();
         Message message;
+        MySizeChecker<Interfaces> mySizeChecker=new MySizeChecker<Interfaces>();
+
         User user=(User)session.getAttribute("user");
         if(PowerLimit.ADDER<=user.getPowerLimit()) {
             //权限允许
-            if(interfaceService.modifyInterface(interfaces)) {
+            if(mySizeChecker.checkSize(interfaces)&&interfaceService.modifyInterface(interfaces)) {
                 message=new Message(Status.SUCCESS);
             } else {
                 message=new Message(Status.ERROR,"更新数据失败");
@@ -205,10 +211,11 @@ public class InterfaceController {
     public Map<String,Message> insertInterface(@RequestBody Interfaces interfaces,HttpSession session) {
         Map<String,Message> messageMap=new HashMap<String, Message>();
         Message message;
+        MySizeChecker<Interfaces> mySizeChecker=new MySizeChecker<Interfaces>();
         User user=(User)session.getAttribute("user");
         if(PowerLimit.ADDER<=user.getPowerLimit()) {
             //权限允许
-            if(interfaceService.insertInterface(interfaces)) {
+            if(mySizeChecker.checkSize(interfaces)&&interfaceService.insertInterface(interfaces)) {
                 message=new Message(Status.SUCCESS);
             } else {
                 message=new Message(Status.ERROR,"更新数据失败");

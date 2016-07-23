@@ -14,7 +14,6 @@ public class Interfaces {
     private String interfaceDescription;  //描述
     private String interfaceRequestResult;  //返回的结果
     private int systemId;  //系统Id
-    private Fields fields; //字段对象
 
     private String interfaceModifyUrl;
     private String interfaceDeleteUrl;
@@ -135,13 +134,6 @@ public class Interfaces {
         this.systemId = systemId;
     }
 
-    public Fields getFields() {
-        return fields;
-    }
-
-    public void setFields(Fields fields) {
-        this.fields = fields;
-    }
 
     public String getInterfaceModifyUrl() {
         return interfaceModifyUrl;
