@@ -15,4 +15,12 @@ public interface UserDao {
      * @return User(id,powerLimit)
      */
     User queryByPassword(@Param("username") String username,@Param("password")String password);
+
+
+    /**
+     *
+     * @param cookiedId
+     * @return
+     */
+    User queryByCookieId(String cookiedId);
 }

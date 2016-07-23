@@ -50,8 +50,8 @@
         function info(str){
             console.info(str);
         }
+
         (function ($){
-           
             // 从后台获取数据
             debugger;
             $.ajax({
@@ -76,7 +76,7 @@
                         $(str).appendTo('#system_container').find('.fa-trash').click(function (event) {
                             delectSystem(event);
                         });
-                        $(str).find('.system_href').click(function (event) ){
+                        $(str).find('.system_href').click(function (event)){
                             tumpItfPage(event);
                         }
                     }else{

@@ -5,8 +5,15 @@
 
 <mapper namespace="com.qg.dao.UserDao">
     <select id="queryByPassword" resultType="User">
-      select id,power_limit
+      select user_id,power_limit
       from t_user
       where username=#{username} and password=#{password}
+    </select>
+
+    <select id="queryByCookieId" resultType="User">
+        select user_id,power_limit
+        from t_user
+        where user_cookie_id=#{cookieId}
+
     </select>
 </mapper>

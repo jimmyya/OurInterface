@@ -12,6 +12,9 @@ public class Fields {
     private String fieldExplain;  //说明
     private int interfaceId;  //接口Id
 
+    private String fieldModifyUrl;
+    private String fieldDeleteUrl;
+
     public int getFieldId() {
         return fieldId;
     }
@@ -66,5 +69,21 @@ public class Fields {
 
     public void setInterfaceId(int interfaceId) {
         this.interfaceId = interfaceId;
+    }
+
+    public String getFieldDeleteUrl() {
+        return fieldDeleteUrl;
+    }
+
+    public void setFieldDeleteUrl(String fieldDeleteUrl) {
+        this.fieldDeleteUrl = fieldDeleteUrl;
+    }
+
+    public String getFieldModifyUrl() {
+        return fieldModifyUrl;
+    }
+
+    public void setFieldModifyUrl(String fieldModifyUrl) {
+        this.fieldModifyUrl = fieldModifyUrl;
     }
 }

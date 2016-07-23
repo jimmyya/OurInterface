@@ -7,7 +7,7 @@ import static javafx.scene.input.KeyCode.T;
 /**
  * Created by CHEN on 2016/7/18.
  */
-public class MD5 {
+public class MyMD5 {
     private final static String salt="17^#$%^63%$^a1!$81!$492&(&147";
 
     /**
@@ -27,7 +27,7 @@ public class MD5 {
      * @param value2 ：参数2
      * @return
      */
-    private static String getMD5(String value1,String value2) {
+    public static String getMD5(String value1,String value2) {
         String base=value1+"salt"+value2;
         String md5=DigestUtils.md5DigestAsHex(base.getBytes());
         return md5;

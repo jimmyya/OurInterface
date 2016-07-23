@@ -22,4 +22,8 @@ public class UserServiceImpl implements UserService{
         }
         return user;
     }
+
+    public User queryByCookieId(String cookieId) {
+        return userDao.queryByCookieId(cookieId);
+    }
 }

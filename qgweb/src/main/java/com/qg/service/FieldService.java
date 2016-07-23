@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface FieldService {
 
-    List<Fields> queryByInterfaceId(int interfaceId);
+    List<Fields> queryByInterfaceId(int interfaceId,int powerLimit);
 
     boolean modifyField(Fields field);
 

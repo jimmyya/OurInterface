@@ -11,11 +11,10 @@ public interface SystemService {
     /**
      * 返回所有的系统详情
      */
-    List<Systems> getAllSystems();
+    List<Systems> getAllSystems(int powerLimit);
 
     /**
      * 增加一个系统
-     * @param systems 系统详情
      * @return false 失败 true 成功
      */
     boolean insertSystem(Systems system);
