@@ -7,27 +7,27 @@
     <select id="queryByInterfaceId" resultType="Fields">
         select *
         from t_field
-        where id=#{interfaceId}
+        where interface_id=#{interfaceId}
     </select>
 
     <update id="modifyField" parameterType="Fields">
         update t_field
         set
-          name=#{name},
-          attribute=#{attribute},
-          description=#{description},
-          default=#{default},
-          explain=#{explain}
+          field_name=#{fieldName},
+          field_attribute=#{fieldAttribute},
+          field_description=#{fieldDescription},
+          field_default_value=#{fieldDefault},
+          field_explain=#{fieldExplain}
         where
           id=#{id}
     </update>
     <delete id="deleteByFieldId">
         delete from t_field
-        where id=#{fieldId}
+        where field_id=#{fieldId}
     </delete>
 
     <insert id="insertField" parameterType="Fields">
-        insert into t_field (id,name,attribute,description,default_value,explain,interface_id)
-        values (#{id},#{name},#{attribute},#{description},#{default_value},#{explain},#{interface_id})
+        insert into t_field (field_id,field_name,field_attribute,field_description,field_default_value,field_field_explain,interface_id)
+        values (#{fieldId},#{fieldName},#{fieldAttribute},#{fieldDescription},#{fieldDefault_value},#{fieldExplain},#{fieldInterface_id})
     </insert>
 </mapper>

@@ -45,6 +45,16 @@ public class Interfaces {
         this.systemId = systemId;
     }
 
+    public Interfaces() {
+        super();
+    }
+
+    public Interfaces(int interfaceId, String interfaceName, String interfaceUrl) {
+        this.interfaceId = interfaceId;
+        this.interfaceName = interfaceName;
+        this.interfaceUrl = interfaceUrl;
+    }
+
     public int getInterfaceId() {
         return interfaceId;
     }

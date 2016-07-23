@@ -28,7 +28,7 @@ import static javafx.scene.input.KeyCode.*;
  * Created by CHEN on 2016/7/18.
  */
 @Controller
-@RequestMapping("/interfaces")
+@RequestMapping("/interface")
 public class InterfaceController {
 
     @Autowired
@@ -38,12 +38,12 @@ public class InterfaceController {
     private FieldService fieldService;
 
     /**
-     * 根据接口Id返回接口详情
-     * @param interfaceId 接口Id
-     * @return 接口的结果包
-     * （Interfaces:interfaceId,name,url,format, requestMethod, powerLimit,
-    author,description,requestResult）
-     * （Message：附加信息）
+     * 根据接口Id返回接口的字段信息：
+     * 返回信息格式：
+     *
+     * @param interfaceId  接口Id
+     * @param session
+     * @return
      */
     @RequestMapping(value="/{interfaceId}/one",method= RequestMethod.GET)
     @ResponseBody
@@ -88,7 +88,7 @@ public class InterfaceController {
      * （Message：附加信息）
      */
     @RequestMapping(value="/{uuid}/{interfaceId}",method= RequestMethod.DELETE)
-    public Map<String,Integer> deleteInterfaceById(@PathVariable("interfaceId") int interfaceId,HttpSession session){
+    public Map<String,Integer> deleteInterfaceById(@PathVariable("uuid")String uuid,@PathVariable("interfaceId") int interfaceId,HttpSession session){
         Map<String,Integer> statusMap=new HashMap<String, Integer>();
         User user=(User)session.getAttribute("user");
         if(PowerLimit.ALLER<=user.getPowerLimit()) {
@@ -104,7 +104,7 @@ public class InterfaceController {
     }
 
     /**
-     *
+     *  新增接口的跳转页面
      * @param interfaceId
      * @return
      */
@@ -113,8 +113,8 @@ public class InterfaceController {
         session.setAttribute("interfaceId",interfaceId);
         return "/interface/interface_modify";
     }*/
-    public String modifyInterfaceById(@PathVariable("interfaceId") int interfaceId) {
-        return "/interface/interface_modify";
+    public String insertInterfaceById(@PathVariable("interfaceId") int interfaceId) {
+        return "/interface/interface_add";
     }
 
 /*    @RequestMapping(value="/interfaceId",method=RequestMethod.GET)
@@ -131,7 +131,7 @@ public class InterfaceController {
      * （System:null，判断返回status，成功则把填入字符直接填上，失败填上原来的数据）
      * （Message：附加信息）
      */
-    @RequestMapping(value="/{uuid}/modify",method= RequestMethod.POST)
+    @RequestMapping(value="/{uuid}/modify",method= RequestMethod.PUT)
     @ResponseBody
     public Map<String,Message> modifyInterface(@RequestBody Interfaces interfaces,HttpSession session) {
         Map<String,Message> messageMap=new HashMap<String, Message>();
@@ -140,6 +140,28 @@ public class InterfaceController {
         if(PowerLimit.ADDER<=user.getPowerLimit()) {
             //权限允许
             if(interfaceService.modifyInterface(interfaces)) {
+                message=new Message(Status.SUCCESS);
+            } else {
+                message=new Message(Status.ERROR,"更新数据失败");
+            }
+        }else {
+            message=new Message(Status.POWER_LIMIT,"权限不足");
+        }
+        messageMap.put("message",message);
+        return messageMap;
+    }
+
+
+
+    @RequestMapping(value="/{uuid}/modify",method= RequestMethod.POST)
+    @ResponseBody
+    public Map<String,Message> insertInterface(@RequestBody Interfaces interfaces,HttpSession session) {
+        Map<String,Message> messageMap=new HashMap<String, Message>();
+        Message message;
+        User user=(User)session.getAttribute("user");
+        if(PowerLimit.ADDER<=user.getPowerLimit()) {
+            //权限允许
+            if(interfaceService.insertInterface(interfaces)) {
                 message=new Message(Status.SUCCESS);
             } else {
                 message=new Message(Status.ERROR,"更新数据失败");

@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,10 +39,10 @@ public class UserController {
     @RequestMapping(value="/login",method= RequestMethod.POST)
     public String userLogin(@RequestParam("user_name") String username, @RequestParam("user_password") String password, HttpSession session, HttpServletResponse response) {
         String returnResult="/user/login";//返回的页面
-        User user=userService.queryByPassword(username,password);//查找用户
+        User user=userService.queryByPassword(username, DigestUtils.md5DigestAsHex(password.getBytes()));//查找用户
         Cookie cookie;
         if(user!=null) {
-            cookie=new Cookie("user_cookie_id", MyMD5.getMD5(user.getUsername(), ""+Calendar.YEAR+Calendar.MONTH+Calendar.WEEK_OF_YEAR));
+            cookie=new Cookie("user_cookie_id", MyMD5.getMD5(user.getUsername(), ""+Calendar.YEAR+Calendar.WEEK_OF_YEAR));
             cookie.setMaxAge(3600*24);//保存一天
             cookie.setPath("/");
             response.addCookie(cookie);

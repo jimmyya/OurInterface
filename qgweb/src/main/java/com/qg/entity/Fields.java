@@ -15,6 +15,20 @@ public class Fields {
     private String fieldModifyUrl;
     private String fieldDeleteUrl;
 
+    public Fields() {
+        super();
+    }
+
+    public Fields(int fieldId, String fieldName, String fieldAttribute, String fieldDescription, String fieldFefaultValue, String fieldExplain, int interfaceId) {
+        this.fieldId = fieldId;
+        this.fieldName = fieldName;
+        this.fieldAttribute = fieldAttribute;
+        this.fieldDescription = fieldDescription;
+        this.fieldFefaultValue = fieldFefaultValue;
+        this.fieldExplain = fieldExplain;
+        this.interfaceId = interfaceId;
+    }
+
     public int getFieldId() {
         return fieldId;
     }
