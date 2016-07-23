@@ -15,8 +15,6 @@ import java.util.Map;
 @Controller
 @RequestMapping("/salt")
 public class SaltController {
-
-
     @RequestMapping(value = "/login/get", method = RequestMethod.GET)
     @ResponseBody
     public Map<String,String> getLoginSalt() {

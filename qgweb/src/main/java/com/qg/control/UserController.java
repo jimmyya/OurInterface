@@ -42,7 +42,7 @@ public class UserController {
         User user=userService.queryByPassword(username, DigestUtils.md5DigestAsHex(password.getBytes()));//查找用户
         Cookie cookie;
         if(user!=null) {
-            cookie=new Cookie("user_cookie_id", MyMD5.getMD5(user.getUsername(), ""+Calendar.YEAR+Calendar.WEEK_OF_YEAR));
+            cookie=new Cookie("user_cookie_id", MyMD5.getMD5(user.getUsername(), ""+Calendar.YEAR+Calendar.DAY_OF_MONTH));
             cookie.setMaxAge(3600*24);//保存一天
             cookie.setPath("/");
             response.addCookie(cookie);

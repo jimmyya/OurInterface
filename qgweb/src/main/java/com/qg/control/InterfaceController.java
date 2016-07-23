@@ -38,14 +38,36 @@ public class InterfaceController {
     private FieldService fieldService;
 
     /**
-     * 根据接口Id返回接口的字段信息：
-     * 返回信息格式：
+     * 根据接口Id返回操作的结果
+     * 结构如下：
      *
+     * 1. 接口结果interfaceResult
+     *  ｛
+     *      结果status：
+     *      @see com.qg.dto.Status
+     *      信息message:
+     *      数据 data:
+     *      list<Interfaces>
+     *      假如权限大于等于ALLER，则说明存在修改和新增，删除接口
+     *      假如权限大于等于ADDER，则说明存在修改和新增接口
+     *     @see com.qg.entity.Interfaces
+     *   ｝
+     * 2. 字段结果fieldResult
+     * {
+     *      结果status：
+     *      @see com.qg.dto.Status
+     *      信息message:
+     *      数据 data:
+     *      list<Fields>
+     *      假如权限大于等于ALLER，则说明存在修改和新增，删除接口
+     *      假如权限大于等于ADDER，则说明存在修改和新增接口
+     *     @see com.qg.entity.Fields
+     * ｝
      * @param interfaceId  接口Id
      * @param session
      * @return
      */
-    @RequestMapping(value="/{interfaceId}/one",method= RequestMethod.GET)
+    @RequestMapping(value="/{interfaceId}/one_interface",method= RequestMethod.GET)
     @ResponseBody
     public Map<String,Results> queryInterfaceById(@PathVariable("interfaceId") int interfaceId,HttpSession session) {
         Map<String,Results> interfaceMap=new HashMap<String, Results>();
@@ -54,7 +76,7 @@ public class InterfaceController {
         List<Fields> fieldList;
         User user=(User)session.getAttribute("user");
         Interfaces interfaces=interfaceService.queryByInterfaceId(interfaceId,user.getPowerLimit());
-
+        interfaceResult.setPowerLimit(user.getPowerLimit());
         if(interfaces==null) {
             interfaceResult.setStatus(Status.ERROR);
             interfaceResult.setMessage("该接口不存在");
@@ -81,11 +103,16 @@ public class InterfaceController {
     }
 
     /**
+     *
      * 根据接口Id删除接口详情
+     * 结构如下：
+     * 响应码status:
+     * @see com.qg.dto.Status
+     *
      * @param interfaceId 接口Id
+     * @param session
      * @return 接口的结果包
-     * （System:null，判断返回status，成功则删除信息，失败填上原来的数据）
-     * （Message：附加信息）
+     *
      */
     @RequestMapping(value="/{uuid}/{interfaceId}",method= RequestMethod.DELETE)
     public Map<String,Integer> deleteInterfaceById(@PathVariable("uuid")String uuid,@PathVariable("interfaceId") int interfaceId,HttpSession session){
@@ -105,15 +132,15 @@ public class InterfaceController {
 
     /**
      *  新增接口的跳转页面
-     * @param interfaceId
+     *  直接跳转到某个页面
      * @return
      */
-    @RequestMapping(value="/{uuid}/{interfaceId}",method=RequestMethod.GET)
+    @RequestMapping(value="/{uuid}/new_interface",method=RequestMethod.GET)
  /*   public String modifyInterfaceById(@PathVariable("interfaceId") int interfaceId,HttpSession session) {
         session.setAttribute("interfaceId",interfaceId);
         return "/interface/interface_modify";
     }*/
-    public String insertInterfaceById(@PathVariable("interfaceId") int interfaceId) {
+    public String beforeInsertInterface() {
         return "/interface/interface_add";
     }
 
@@ -125,13 +152,21 @@ public class InterfaceController {
         return idMap;
     }*/
 
+
     /**
-     * 根据 接口Id 修改接口
-     * @return 接口的结果包 （status:2000成功 5000失败）
-     * （System:null，判断返回status，成功则把填入字符直接填上，失败填上原来的数据）
-     * （Message：附加信息）
+     * 修改接口信息
+     * 返回结构
+     * 信息：message
+     * ｛
+     *      响应码status:
+     *  @see com.qg.dto.Status
+     *      消息message:
+     * ｝
+     * @param interfaces
+     * @param session
+     * @return
      */
-    @RequestMapping(value="/{uuid}/modify",method= RequestMethod.PUT)
+    @RequestMapping(value="/{uuid}/{interfaceId}",method= RequestMethod.PUT)
     @ResponseBody
     public Map<String,Message> modifyInterface(@RequestBody Interfaces interfaces,HttpSession session) {
         Map<String,Message> messageMap=new HashMap<String, Message>();
@@ -152,8 +187,20 @@ public class InterfaceController {
     }
 
 
-
-    @RequestMapping(value="/{uuid}/modify",method= RequestMethod.POST)
+    /**
+     * 插入一个接口
+     * 返回结构
+     * 信息：message
+     * ｛
+     *      响应码status:
+     *  @see com.qg.dto.Status
+     *      消息message:
+     * ｝
+     * @param interfaces
+     * @param session
+     * @return
+     */
+    @RequestMapping(value="/{uuid}/{interfaceId}",method= RequestMethod.POST)
     @ResponseBody
     public Map<String,Message> insertInterface(@RequestBody Interfaces interfaces,HttpSession session) {
         Map<String,Message> messageMap=new HashMap<String, Message>();

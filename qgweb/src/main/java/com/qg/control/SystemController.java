@@ -42,7 +42,23 @@ public class SystemController {
 
     /**
      * 查询并返回所有的系统页面
-     * @return 200 获得成功 500 服务器异常
+     * 返回的结构
+     * 结果result
+     * ｛
+     *      状态status:
+     *      @see com.qg.dto.Status
+     *      权限powerLimit:
+     *      @see com.qg.entity.PowerLimit
+     *      假如权限大于等于ALLER，则说明存在修改和新增，删除接口
+     *      假如权限大于等于ADDER，则说明存在修改和新增接口
+     *      数据data：
+     *      listSystem
+     *
+     *      {
+     *          @see com.qg.entity.Systems
+     *      }
+     * ｝
+     * @return
      */
     @RequestMapping(value="/allsystem",method= RequestMethod.GET)
     @ResponseBody
@@ -87,7 +103,12 @@ public class SystemController {
         return idMap;
     }*/
 
-    @RequestMapping(value="/{systemId}/allInterface",method=RequestMethod.GET)
+    /**
+     *
+     * @param systemId
+     * @return
+     */
+    @RequestMapping(value="/{systemId}/all_interface",method=RequestMethod.GET)
     @ResponseBody
     public Map<String,Results<List<Interfaces>>> queryBySystemId(@PathVariable("systemId")int systemId) {
         Map<String,Results<List<Interfaces>>> listMap=new HashMap<String, Results<List<Interfaces>>>();
@@ -105,38 +126,54 @@ public class SystemController {
         return listMap;
     }
 
+
     /**
-     * 增加一个
-     * @param name 系统名
-     * @param description  系统描述
+     * 直接跳到新增页面
      * @return
      */
-    @RequestMapping(value="/{uuid}/system",method=RequestMethod.POST)
-    public String insertSystem(String name,String description,HttpSession session) {
+    @RequestMapping(value="/{uuid}/new_system",method=RequestMethod.GET)
+    public String beforeInsertSystem() {
+      return "/system/system_add";
+    }
+
+
+    /**
+     * 增加一个系统
+     * 返回结构
+     * 响应码status：
+     * @see com.qg.dto.Status
+     * @return
+     */
+    @RequestMapping(value="/{uuid}/new_system",method=RequestMethod.POST)
+    @ResponseBody
+    public Map<String,Integer> insertSystem(@RequestBody Systems systems,HttpSession session) {
         User user=(User)session.getAttribute("user");
-        String resultReturn="/system/system_index";
+        Map<String,Integer> statusMap=new HashMap<String, Integer>();
         if(PowerLimit.ADDER<user.getPowerLimit()) {
             //权限允许
-            Systems system=new Systems(name,description);
-            if(systemService.insertSystem(system)) {//插入成功
+            if(systemService.insertSystem(systems)) {//插入成功
+                statusMap.put("status",Status.SUCCESS);
             } else {
-                resultReturn="/system/insert";//返回插入页面
+                statusMap.put("status",Status.ERROR);
             }
         } else {
-            resultReturn="/power/power_error";//权限错误页面
+            statusMap.put("status",Status.POWER_LIMIT);
         }
-        return resultReturn;
+        return statusMap;
     }
 
     /**
-     * 修改系统的信息
+     * 修改系统信息
+     *
+     * 返回的结构
      * @param system
-     * @return Message (status,message)
+     * @param session
+     * @return
      */
     @RequestMapping(value="/{uuid}/{systemId}",method=RequestMethod.PUT)
     @ResponseBody
-   public Map<String,Object> modifySystemById(@RequestBody Systems system, HttpSession session) {
-        Map<String,Object> messageMap=new HashMap<String, Object>();
+   public Map<String,Message> modifySystemById(@RequestBody Systems system, HttpSession session) {
+        Map<String,Message> messageMap=new HashMap<String, Message>();
         Message message;
         //判断权限
         User user = (User)session.getAttribute("user");
@@ -159,8 +196,7 @@ public class SystemController {
     /**
      * 通过系统的Id删除系统详情
      * @param systemId  系统Id
-     * @return  删除后的结果包（详见Result类）
-     * （System:null，判断返回status，成功则把详情删除，失败则则保留不动）
+     * @return  删除后的结果包
      * （Message：附加信息）
      */
     @RequestMapping(value="/{uuid}/{systemId}",method= RequestMethod.DELETE)

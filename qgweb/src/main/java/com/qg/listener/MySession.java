@@ -3,6 +3,7 @@ package com.qg.listener;
 import com.qg.entity.PowerLimit;
 import com.qg.entity.User;
 
+import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpSessionListener;
 /**
  * Created by CHEN on 2016/7/22.
  */
+@WebListener
 public class MySession implements HttpSessionListener{
     public void sessionCreated(HttpSessionEvent se) {
         System.out.println("注入用户");

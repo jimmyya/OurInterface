@@ -8,8 +8,8 @@ import java.util.UUID;
  */
 public class MyUUID {
     private static Random random= new Random();
-    private static int UUID_CODE= random.nextInt(100);
-    private static int UUID_CODE2= random.nextInt(100);
+    private static int UUID_CODE= random.nextInt(10000);
+    private static int UUID_CODE2= random.nextInt(10000);
     public static int getCode() {
         return UUID_CODE;
     }
