@@ -8,6 +8,7 @@ public class Results<T> {
     private int status;
     private T data;
     private String message;
+    private int powerLimit;
 
     public Results() {
         super();
@@ -50,5 +51,13 @@ public class Results<T> {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public int getPowerLimit() {
+        return powerLimit;
+    }
+
+    public void setPowerLimit(int powerLimit) {
+        this.powerLimit = powerLimit;
     }
 }

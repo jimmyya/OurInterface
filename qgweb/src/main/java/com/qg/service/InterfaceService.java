@@ -13,7 +13,7 @@ public interface InterfaceService {
 
     List<Interfaces> queryByInterfaceName(String interfaceName);
 
-    Interfaces queryByInterfaceId(int interfaceId);
+    Interfaces queryByInterfaceId(int interfaceId,int powerLimit);
 
     boolean deleteInterfaceById(int interfaceId);
 

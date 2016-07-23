@@ -15,12 +15,6 @@ public interface SystemDao {
      */
     List<Systems> queryAll();
 
-    /**
-     * 根据系统Id查询所有的Id
-     * @param systemId 系统Id
-     * @return  Systems(id,name,description)
-     */
-    Systems queryBySystemId(int systemId);
 
     /**
      * 增加一个系统

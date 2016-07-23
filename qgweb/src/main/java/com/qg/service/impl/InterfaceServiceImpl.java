@@ -2,11 +2,14 @@ package com.qg.service.impl;
 
 import com.qg.dao.InterfaceDao;
 import com.qg.entity.Interfaces;
+import com.qg.entity.PowerLimit;
 import com.qg.service.InterfaceService;
+import com.qg.utils.MyUUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by CHEN on 2016/7/19.
@@ -24,8 +27,17 @@ public class InterfaceServiceImpl implements InterfaceService{
         return interfaceDao.queryByInterfacesName(interfaceName);
     }
 
-    public Interfaces queryByInterfaceId(int interfaceId) {
-        return interfaceDao.queryByInterfacesId(interfaceId);
+    public Interfaces queryByInterfaceId(int interfaceId,int powerLimit) {
+        Interfaces interfaces=interfaceDao.queryByInterfacesId(interfaceId);
+        if(powerLimit>= PowerLimit.ALLER) {
+            interfaces.setInterfaceModifyUrl("/interface/"+ MyUUID.getCode()+"/"+interfaces.getInterfaceId());
+            interfaces.setInterfaceDeleteUrl("/interface/"+MyUUID.getCode()+"/"+interfaces.getInterfaceId());
+        } else if(powerLimit>=PowerLimit.ADDER) {
+            interfaces.setInterfaceModifyUrl("/system/"+ MyUUID.getCode2()+"/"+interfaces.getInterfaceId());
+        } else {
+            //
+        }
+        return interfaces;
     }
 
     public boolean deleteInterfaceById(int interfaceId) {

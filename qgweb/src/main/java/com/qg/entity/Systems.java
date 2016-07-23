@@ -8,6 +8,8 @@ public class Systems {
     private int systemId;
     private String systemName;
     private String systemDescription;
+    private String systemModifyUrl;
+    private String systemDeleteUrl;
 
     public Systems() {
         super();
@@ -46,5 +48,21 @@ public class Systems {
 
     public void setSystemDescription(String systemDescription) {
         this.systemDescription = systemDescription;
+    }
+
+    public String getSystemDeleteUrl() {
+        return systemDeleteUrl;
+    }
+
+    public void setSystemDeleteUrl(String systemDeleteUrl) {
+        this.systemDeleteUrl = systemDeleteUrl;
+    }
+
+    public String getSystemModifyUrl() {
+        return systemModifyUrl;
+    }
+
+    public void setSystemModifyUrl(String systemModifyUrl) {
+        this.systemModifyUrl = systemModifyUrl;
     }
 }

@@ -14,4 +14,12 @@ public interface UserService {
      * @return User(id,username,password,powerLimit)
      */
     User queryByPassword(String username,String password);
+
+
+    /**
+     * 根据cookieId 查找用户 成功返回用户 失败返回空
+     * @param cookieId
+     * @return
+     */
+    User queryByCookieId(String cookieId);
 }

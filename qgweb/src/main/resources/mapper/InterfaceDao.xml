@@ -5,27 +5,27 @@
 <mapper namespace="com.qg.dao.InterfaceDao">
 
     <select id="queryBySystemId" resultType="Interfaces">
-        select  id,name,url
-        form t_interface
-        where system_id =#{systemId}
+        select  interface_id,interface_name,interface_url
+        from t_interface
+        where interface_id =#{systemId}
     </select>
 
     <select id="queryByInterfacesId" resultType="Interfaces">
-        select id,name,url
+        select interface_id,interface_name,interface_url
         from t_interface
-        where id=#{interfaceId}
+        where interface_id=#{interfaceId}
     </select>
 
     <select id="queryByInterfacesName" resultType="Interfaces">
-        select id,name,url
+        select interface_id,interface_name,interface_url
         from t_interface
-        where name like '%${interfacesName}%'
+        where interface_name like '%${interfacesName}%' or interface_url like '%${interfacesName}%'
     </select>
 
     <select id="queryByInterfacesUrl" resultType="Interfaces">
-        select id,name,url
+        select interface_id,interface_name,interface_url
         from t_interface
-        where url=#{interfacesUrl}
+        where interface_url=#{interfacesUrl}
     </select>
 
 
@@ -36,11 +36,11 @@
 
     <delete id="deleteByInterfacesId">
         delete from t_interface
-        where id = #{interfacesId}
+        where interface_id = #{interfacesId}
     </delete>
 
     <insert id="insertInterfaces" parameterType="Interfaces">
-        insert into t_interface (name,url,format,request_method,power_limit,author,description,request_result,system_id);
+        insert into t_interface (interface_name,interface_url,interface_format,interface_request_method,interface_power_limit,interface_author,interface_description,request_result,system_id);
         values (#{name},#{url},#{format},#{request_method},#{power_limit},
         #{author},#{description},#{request_result},#{system_id})
     </insert>

@@ -8,7 +8,18 @@
     </select>
 
     <insert id="insertSystem" parameterType="Systems">
-        insert t_system (name,description)
+        insert t_system (system_name,system_description)
         values (#{name},#{description})
     </insert>
+
+    <delete id="deleteBySystemId">
+        delete from t_system
+        where system_id=#{systemId}
+    </delete>
+
+    <update id="modifySystem">
+        update t_system set
+        system_name=#{systemName},system_description=#{systemDescription}
+        where system_id=#{systemId}
+    </update>
 </mapper>

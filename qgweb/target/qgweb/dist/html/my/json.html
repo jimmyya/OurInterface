@@ -58,6 +58,22 @@
             });
         });*/
 
+
+
+        <!--获得接口详情-->
+        $(document).ready(function() {
+            $.ajax({
+                type:'get',
+                url:'/system/all',
+                dataType:'json',
+                contentType:'application/json',
+                success:function(data) {
+                    alert(data['result']);
+                }
+            });
+        });
+
+
     </script>
     <!--链接实例-->
     <a href="/system/1">系统1</a>
@@ -68,6 +84,10 @@
         <input type="text" id="description" name="description"/>
         <input type="submit" value="提交"/>
     </form>
+
+    <!--获得系统-->
+    <a href="/system/1">系统1</a>
+
 
 </body>
 </html>

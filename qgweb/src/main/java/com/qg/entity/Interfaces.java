@@ -16,6 +16,9 @@ public class Interfaces {
     private int systemId;  //系统Id
     private Fields fields; //字段对象
 
+    private String interfaceModifyUrl;
+    private String interfaceDeleteUrl;
+
 
     public Interfaces(int interfaceId, String interfaceName, String interfaceUrl, String interfaceFormat, String interfaceRequestMethod, String interfacePowerLimit, String interfaceAuthor, String interfaceDescription, String interfaceRequestResult) {
         this.interfaceId = interfaceId;
@@ -40,6 +43,16 @@ public class Interfaces {
         this.interfaceDescription = interfaceDescription;
         this.interfaceRequestResult = interfaceRequestResult;
         this.systemId = systemId;
+    }
+
+    public Interfaces() {
+        super();
+    }
+
+    public Interfaces(int interfaceId, String interfaceName, String interfaceUrl) {
+        this.interfaceId = interfaceId;
+        this.interfaceName = interfaceName;
+        this.interfaceUrl = interfaceUrl;
     }
 
     public int getInterfaceId() {
@@ -128,5 +141,21 @@ public class Interfaces {
 
     public void setFields(Fields fields) {
         this.fields = fields;
+    }
+
+    public String getInterfaceModifyUrl() {
+        return interfaceModifyUrl;
+    }
+
+    public void setInterfaceModifyUrl(String interfaceModifyUrl) {
+        this.interfaceModifyUrl = interfaceModifyUrl;
+    }
+
+    public String getInterfaceDeleteUrl() {
+        return interfaceDeleteUrl;
+    }
+
+    public void setInterfaceDeleteUrl(String interfaceDeleteUrl) {
+        this.interfaceDeleteUrl = interfaceDeleteUrl;
     }
 }
