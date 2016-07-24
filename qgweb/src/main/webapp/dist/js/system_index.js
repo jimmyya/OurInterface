@@ -1,27 +1,25 @@
 /**
  * bug: 1. 修改框弹出来之后点击确认后，那个框没有消失
  */
-var URL_GET_SYSTEM = 'http://g.cn'; //'/system/all'
+var URL_GET_SYSTEM = '/system/allsystem';
 var URL_MODIFY_SYSTEM = 'http://gg.cn';
-var URL_DELETE_SYSTEM = 'http://delete.cn'; // '/system/' + num + '/delete',
-Mock.mock(URL_GET_SYSTEM, {
-    "result":{
-        "status":200,
-        "data":[
-            {"id":1,"name":"系统1","description":"系统1"},
-            {"id":2,"name":"系统2","description":"系统2"}
-        ],
-        "message":null
-     }
-  });
-Mock.mock(URL_MODIFY_SYSTEM, {
-    "status": 2000
-  });
-Mock.mock(URL_DELETE_SYSTEM,{
-    "status": 400
-});
-
-
+// var URL_DELETE_SYSTEM = '/system/' + num + '/delete';
+// Mock.mock(URL_GET_SYSTEM, {
+//     "result":{
+//         "status":200,
+//         "data":[
+//             {"id":1,"name":"系统1","description":"系统1"},
+//             {"id":2,"name":"系统2","description":"系统2"}
+//         ],
+//         "message":null
+//      }
+//   });
+// Mock.mock(URL_MODIFY_SYSTEM, {
+//     "status": 2000
+//   });
+// Mock.mock(URL_DELETE_SYSTEM,{
+//     "status": 400
+// });
 
 function Popup (){};
 Popup.prototype.show = function(condition, message, time){
@@ -66,7 +64,7 @@ var handler = {
         $.ajax({
             data: '',
             type: 'get',
-            url: URL_DELETE_SYSTEM,
+            url: '/system/' + num + '/delete',
             dataType: 'json',
             contentType: 'application/json',
             success: function(data) {

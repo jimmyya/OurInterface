@@ -338,7 +338,6 @@ var handler = {
             handler._strogage.s.getItem(key);
         }
     },
-    // 未完成
     _handleOneInterface: function(data){
         var str = '',
             temp = null,
@@ -557,22 +556,5 @@ var sy = {
         error: function(data) {
             console.info('[system error]获取所有接口失败');
         }
-    });
-})();
-
-(function(){
-    // 绑定打开事件
-    $('.sidebar li span').click(function (event) {
-         $.ajax({
-            type: 'get',
-            url: '/interface/one_interface',
-            contentType: 'application/json',
-            success: function(data) {
-                
-            },
-            error: function(data) {
-                console.info('[system error]获取接口详细信息失败');
-            }
-        });
     });
 })();
