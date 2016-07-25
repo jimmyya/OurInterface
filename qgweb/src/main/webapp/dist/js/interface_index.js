@@ -436,7 +436,7 @@ var handler = {
         $('.button_qun').append('<button type="button" id="form_submit">确定</button>');
         $('#form_submit').click(function(event){
             $.ajax({
-                type: 'get',
+                type: 'put',
                 url: URL_UPDATE_INTERFACE,
                 contentType: 'application/json',
                 data: handler.serialize(),
@@ -458,7 +458,7 @@ var handler = {
         $('#form_arg_submit').click(function(event){
             // 还没判断数据
             $.ajax({
-                type: 'get',
+                type: 'put',
                 url: URL_UPDATE_INTERFACE,
                 contentType: 'application/json',
                 data: handler.serialize(),

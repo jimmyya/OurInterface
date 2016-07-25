@@ -63,7 +63,7 @@ var handler = {
         // this._changeCancelName(event);   // 删除按钮的取消功能，现在先不做这项，因为如果一不小心按了很多个删除呢
         $.ajax({
             data: '',
-            type: 'get',
+            type: 'delete',
             url: '/system/' + num + '/delete',
             dataType: 'json',
             contentType: 'application/json',
