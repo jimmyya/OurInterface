@@ -4,17 +4,17 @@
 <head>
     <meta charset="UTF-8" />
     <title>添加接口</title>
-    <link rel="stylesheet" href="../../css/add_interface.css" />
-    <!-- <script src="http://cdn.tinymce.com/4/tinymce.min.js"></script> -->
-    <!-- <script>
+    <link rel="stylesheet" href="/dist/css/interface_add.css" />
+    <script src="http://cdn.tinymce.com/4/tinymce.min.js"></script>
+    <script>
     tinymce.init({
         selector: 'textarea'
     });
-    </script> -->
+    </script>
 </head>
 
 <body>
-<h1>添加接口</h1>
+<h1>添加接口<a href="javascript:window.history.go(-1);">返回</a></h1>
     <form id="itf_form" class="subwrapper" action="" methob="post">
         <div class="fl">
             <label for="itf_name">接口名称</label>
@@ -42,7 +42,7 @@
         </fieldset>
         <label id="itf_lb_return" for="itf_return">返回结果</label>
         <textarea name="itf_return" id="itf_return" cols="30" rows="10"></textarea>
-            <button type="submit" id="submit">提交</button>
+            <button type="button" id="submit">提交</button>
     </form>
     <script>
         if(typeof sessionStorage.system_id === 'undefined'){

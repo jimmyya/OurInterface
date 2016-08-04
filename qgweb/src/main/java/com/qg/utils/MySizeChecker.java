@@ -19,8 +19,8 @@ public class MySizeChecker<T> {
     /**
      * 用户
      */
-    public  static final int USERNAME=30;
-    public  static final int PASSWORD=30;
+    public  static final int USERNAME=50;
+    public  static final int PASSWORD=50;
     public  static final int POWERLIMIT=3;
 
 

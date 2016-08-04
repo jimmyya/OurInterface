@@ -39,7 +39,8 @@ public class UserController {
      */
     @RequestMapping(value="/login",method= RequestMethod.POST)
     public String userLogin(@RequestParam("user_name") String username, @RequestParam("user_password") String password, HttpSession session, HttpServletResponse response) {
-        String returnResult = "/user/login";//返回的页面
+        String returnResult = "user/login";//返回的页面
+
         if(username.length()>= MySizeChecker.USERNAME||password.length()>=MySizeChecker.PASSWORD) {
             //字符值过大
 
@@ -54,7 +55,7 @@ public class UserController {
 
                 session.setAttribute("userStatus", "login");
                 session.setAttribute("user", user);//把整个user存到session中
-                returnResult = "/system/system_index";
+                returnResult = "system/system_index";
             }
         }
         return returnResult;

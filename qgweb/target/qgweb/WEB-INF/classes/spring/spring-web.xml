@@ -31,7 +31,8 @@
         <property name="prefix" value="/dist/html/"/>
         <property name="suffix" value=".html"/>
     </bean>
-    <mvc:resources location="/dist/" mapping="/dist/**"/>
+
+    <!--<mvc:resources location="/dist/" mapping="/dist/**"/>-->
     <mvc:annotation-driven />
     <!--4.扫描web相关的bean-->
     <!--把我们的控制器放在spring的容器中-->
