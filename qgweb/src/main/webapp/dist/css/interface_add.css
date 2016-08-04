@@ -13,9 +13,22 @@ h1{
     margin:0 0 20px;
     text-align: center;
     padding: 50px 0;
+    position: relative;
     color: wheat;
     font-family: cursive;
     background: #655;
+}
+
+h1 a{
+    font-size: 14px;
+    position: absolute;
+    margin: 0 20px;
+    text-decoration: none;
+    color: white;
+}
+
+h1 a:hover{
+    color: wheat;
 }
 
 label{

@@ -1,0 +1,104 @@
+body{
+    margin: 0;
+    font-family: '微软雅黑';
+}
+
+ol{
+    list-style: none;
+}
+
+h1,h2{
+    font-weight: normal;
+}
+
+
+.body_full{
+    width: 100%;
+    min-width: 1000px;
+}
+
+#sidebar{
+    width: 300px;
+    float: left;
+    box-sizing: border-box;
+    padding: 20px 20px 5000px;
+    margin-bottom: -3000px;
+}
+
+#sidebar h2{
+    text-align: center;
+}
+
+#sidebar ol{
+    overflow: hidden;
+}
+
+#sidebar li{
+    float: left;
+}
+
+.sb_name{
+    margin: 0 10px 0 0px;
+    width: 180px;
+    float: left;
+}
+
+#sidebar li i{
+    float: right;
+    line-height: 16px;
+}
+
+
+.section{
+    margin-left: 300px;
+}
+
+.section .ct{
+    text-align: center;
+    border: 0;
+}
+
+.section .ct h1{
+    border: none;
+}
+
+.section h1{
+    font-size: 32px;
+    margin: 0;
+    padding-top: 32px;
+    border-bottom: 1px solid gray;
+    padding-bottom: 5px;
+    margin-right: 30px;
+}
+
+.section h2{
+    margin: 5px 0;
+    margin-right: 30px;
+    border-bottom: 1px solid gray;
+    padding-top: 32px;
+    padding-bottom: 5px;
+}
+
+.data_form{
+    border: 1px solid #655;
+    width: 96%;
+}
+
+.form_tr{
+    width: 100%;
+    padding-bottom: 3px;
+    overflow: hidden;
+    border-bottom: 1px solid #655;
+}
+
+.form_name, .form_attr, .form_desc, .form_defa, .form_exp{
+    width: 18%;
+    float: left;
+    padding: 3px 1%;
+}
+
+i{
+    float: right;
+    margin: 5px 30px;
+    font-size: 24px;
+}
