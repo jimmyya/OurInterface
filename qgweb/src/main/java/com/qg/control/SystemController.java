@@ -80,6 +80,12 @@ public class SystemController {
         return systemMap;
     }
 
+    @RequestMapping(value="/system_index",method=RequestMethod.GET)
+    public String getSystemIndex() {
+        return "/system/system_index";
+    }
+
+
     /**
      * 返回系统详情页面
      * @param systemId  系统Id
@@ -91,7 +97,7 @@ public class SystemController {
         return "/interface/interface_index";
     }*/
     @RequestMapping(value="/{system_id}",method=RequestMethod.GET)
-    public String getSystemById(@PathVariable("systemId")int systemId) {
+    public String getSystemById(@PathVariable("system_id")int systemId) {
         return "/interface/interface_index";
     }
 
@@ -168,7 +174,6 @@ public class SystemController {
      * 修改系统信息
      *
      * 返回的结构
-     * @param system
      * @param session
      * @return
      */

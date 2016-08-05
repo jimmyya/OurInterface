@@ -62,7 +62,7 @@ var handler = {
         var num = $(event.target).prevAll("h3").children('a').attr('href').split('/')[2];
         // this._changeCancelName(event);   // 删除按钮的取消功能，现在先不做这项，因为如果一不小心按了很多个删除呢
         $.ajax({
-            data: '',
+            data: $(event.target).attr('data-url'),
             type: 'delete',
             url: '/system/1/' + num ,
             dataType: 'json',
@@ -107,10 +107,11 @@ var handler = {
     },
     _changeEle: function(){
         var temp = handler.temp;
-        temp.sy_name = $('#system_name').val();
-        temp.sy_desc = $('#system_description').val();
-        $('#system_' + handler.temp.sy_id).find('.system_href').text(temp.sy_name);
-        $('#system_' + handler.temp.sy_id).find('p').text(temp.sy_desc);
+        temp.sy_name = $('#systemName').val();
+        temp.sy_desc = $('#systemDescription').val();
+        var str = '#system_' + handler.temp.sy_id.slice(handler.temp.sy_id.lastIndexOf('/')+1);
+        $(str).find('.system_href').text(temp.sy_name);
+        $(str).find('p').text(temp.sy_desc);
     },
     _bindPopup: function(){
         // 绑定事件
@@ -118,13 +119,18 @@ var handler = {
             Popup.prototype.disappear();
         });
         $('#system_submit').click(function (event){
+            var system={
+                "systemId":handler.temp.sy_id.slice(handler.temp.sy_id.lastIndexOf('/')+1),
+                "systemName":$('#systemName').val(),
+                "systemDescription":$('#systemDescription').val()};
             $.ajax({
-                url: URL_MODIFY_SYSTEM,
-                type: 'post',
-                data: $('#modify_system').serialize(),
+                url: handler.temp.sy_id,
+                type: 'put',
+                data: JSON.stringify(system),
+                contentType: 'application/json',
                 dataType: 'json',
                 success: function(data){
-                    if(data.status === 2000){
+                    if(data.message.status === 2000){
                         // 修改成功之后渲染页面，同时修改handler的temp。
                         handler._changeEle();
                         Popup.prototype.disappear();
@@ -141,7 +147,7 @@ var handler = {
     },
     modifySystem: function(event){
         var $parent = $(event.target).parent(); //获取到li节点
-        this.temp.sy_id = $parent.find('a').attr('href').split('/')[2];
+        this.temp.sy_id = $(event.target).attr('data-url');
         this.temp.sy_name = $parent.find('a').text();
         this.temp.sy_desc = $parent.find('p').text();
         // 插入字符串
@@ -152,13 +158,12 @@ var handler = {
     _renderForm: function (_this,temp) {
         console.info('_renderForm.this'+ _this);
         str = '<form id="modify_system">'
-                + '<label for="system_name">系统名称'
+                + '<label for="systemName">系统名称'
                 + '</label>'
-                + '<input type="hidden" name="system_id" id="system_id" value="' + _this.temp.sy_id + '"/>'
-                + '<input type="text" name="system_name" id="system_name" value="' + _this.temp.sy_name + '"/>'
-                + '<label for="system_description">系统描述'
+                + '<input type="text" name="systemName" id="systemName" value="' + _this.temp.sy_name + '"/>'
+                + '<label for="systemDescription">系统描述'
                 + '</label>'
-                + '<textarea id="system_description">' + _this.temp.sy_desc + '</textarea>'
+                + '<textarea id="systemDescription" name="systemDescription">' + _this.temp.sy_desc + '</textarea>'
                 + '<button type="button" id="system_cancel" >取消</button>'
                 + '<button type="button" id="system_submit" >确定</button>'
             +'</form>';
@@ -178,23 +183,23 @@ var handler = {
         success: function (data) {
             var str = '';
             data = data.result;
-            if(data.status === 200){
+            if(data.status === 2000){
                 data = data.data;
                 for(var i = 0,len = data.length; i < len; i++){
-                    str = str + '<li id="system_' + data[i].id + '" >'
-                        + '<h3><a class="system_href" href="/system/'+ data[i].id+'">' + data[i].name + '</a></h3>'
-                        + '<p>' + data[i].description + '</p>'
-                        + '<i class="fa fa-pencil" aria-hidden="true"></i>'
-                        + '<i class="fa fa-trash" aria-hidden="true"></i>'
+                    str = str + '<li id="system_' + data[i].systemId + '" >'
+                        + '<h3><a class="system_href" href="/system/'+ data[i].systemId+'">' + data[i].systemName + '</a></h3>'
+                        + '<p>' + data[i].systemDescription + '</p>'
+                        + '<i class="fa fa-pencil" aria-hidden="true" data-url="'+ data[i].systemDeleteUrl +'"></i>'
+                        + '<i class="fa fa-trash" aria-hidden="true" data-url="'+ data[i].systemModifyUrl +'"></i>'
                         + '</li>';
                         }
 
                 $(str).appendTo('#system_container');
                 $('.fa-trash').click(function (event) {
-                    handler.delectSystem(event);
+                            handler.delectSystem(event);
                 });
                 $('.fa-pencil').click(function (event) {
-                    handler.modifySystem(event);
+                            handler.modifySystem(event);
                 });
                 $('.system_href').click(function (event) {
                     handler.tumpItfPage(event);

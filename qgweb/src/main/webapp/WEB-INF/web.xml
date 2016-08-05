@@ -4,9 +4,9 @@
                       http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1"
          metadata-complete="true">
-<!--  <listener>
+  <listener>
     <listener-class>com.qg.listener.MySession</listener-class>
-  </listener>-->
+  </listener>
 
   <error-page>
     <error-code>404</error-code>

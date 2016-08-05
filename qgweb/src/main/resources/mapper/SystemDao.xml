@@ -9,7 +9,7 @@
 
     <insert id="insertSystem" parameterType="Systems">
         insert t_system (system_name,system_description)
-        values (#{name},#{description})
+        values (#{systemName},#{systemDescription})
     </insert>
 
     <delete id="deleteBySystemId">

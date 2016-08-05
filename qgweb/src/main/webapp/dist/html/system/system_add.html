@@ -6,15 +6,41 @@
 </head>
 <body>
     <div class="wrapper" id="login">
-        <form action="/system/1/new_system" id="system_form"  autocomplete="off" method="post">
+        <span id="message"></span>
+        <form  method="post" id="system_form"  autocomplete="off">
             <label>系统名称
             </label>
                 <input type="text" name="system_name" id="system_name"/>
             <label>系统描述
             </label>
-                <textarea id="system_description"></textarea>
-            <button type="submit" id="system_submit" >确定</button>
+                <textarea id="system_description" name="system_description"></textarea>
+            <button type="button" id="system_submit">确定</button>
         </form>
+        <a href="/system/system_index">返回</a>
     </div>
+    <script src="https://cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+    <script>
+       $('#system_submit').click(function(){
+           var system={"systemName":$('#system_name').val(),"systemDescription":$("#system_description").val()};
+            $.ajax({
+                type:'post',
+                url:'/system/1/new_system',
+                dataType:'json',
+                data: JSON.stringify(system),
+                contentType:'application/json',
+                success:function(data) {
+                    if(data['status']==2000) {
+                        $('#message').html("新增系统成功");
+                    } else {
+                        $('#message').html("新增系统失败");
+                    }
+                },
+                error:function() {
+                    $('#message').html("新增系统失败");
+
+                }
+            });
+        });
+    </script>
 </body>
 </html>
