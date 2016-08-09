@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>json交互实例</title>
+</head>
+<body>
+    <script src="https://cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+    <script>
+        /*获得盐值*/
+/*           $(document).ready(function() {
+            var saveDataArray=[];
+            var data={"username":"jimmyya"};
+            var data1={"username":"ersena"};
+            saveDataArray.push(data);
+            saveDataArray.push(data1);
+            $.ajax({
+                type:'post',
+                url:'/salt/saveUser',
+                dataType:'json',
+                contentType:'application/json',
+                data:JSON.stringify(saveDataArray),
+                success:function(data) {
+                    alert(data['message']);
+                }
+            });
+        });*/
+        /*根据Id删除系统*/
+        $(document).ready(function() {
+            $.ajax({
+                type:'delete',
+                url:'/system/1',
+                contentType:'application/json',
+                success:function(data) {
+                    alert(data['message']['message']);
+                }
+            });
+        });
+        /*获得所有系统内容*/
+        /*
+          返回内容：
+         {"result":
+            {"status":200,
+             "data":[{"id":1,"name":"系统1","description":"系统1"},{"id":2,"name":"系统2","description":"系统2"}],
+             "message":null
+             }
+          }
+        */
+/*        $(document).ready(function() {
+            $.ajax({
+                type:'get',
+                url:'/system/all',
+                dataType:'json',
+                contentType:'application/json',
+                success:function(data) {
+                    alert(data['result']);
+                }
+            });
+        });*/
+
+
+
+        <!--获得接口详情-->
+        $(document).ready(function() {
+            $.ajax({
+                type:'get',
+                url:'/system/all',
+                dataType:'json',
+                contentType:'application/json',
+                success:function(data) {
+                    alert(data['result']);
+                }
+            });
+        });
+
+
+    </script>
+    <!--链接实例-->
+    <a href="/system/1">系统1</a>
+    <a href="/system/1">系统1</a>
+
+    <form action="/system/system" method="post">
+        <input type="text" id="name" name="name"/>
+        <input type="text" id="description" name="description"/>
+        <input type="submit" value="提交"/>
+    </form>
+
+    <!--获得系统-->
+    <a href="/system/1">系统1</a>
+
+
+</body>
+</html>

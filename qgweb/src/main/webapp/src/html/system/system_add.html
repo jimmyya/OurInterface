@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>添加新系统</title>
+    <link rel="stylesheet" href="../../css/interface_blue.css" />
+</head>
+
+<body>
+    <div id="header" class="wrapper">
+        <h1>Welcome to our interface system</h1>
+    </div>
+    <div class="wrapper" id="add_system">
+        <form method="post" id="system_form" autocomplete="off">
+            <label for="system_name">系统名称
+            </label>
+            <input type="text" name="system_name" id="system_name" />
+            <label for="system_description">系统描述
+            </label>
+            <textarea id="system_description" name="system_description"></textarea>
+            <div class="tump">
+                <a href="/system/system_index">返回</a>
+                <button type="button" id="system_submit">确定</button>
+            </div>
+        </form>
+        
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+    <script>
+    (function() {
+        var Popup = (function() {
+            function show(condition, message, time) {
+                if (condition) {
+                    var _this = this;
+                    console.info(_this);
+                    var parent = document.getElementById("popup");
+                    var target = document.getElementById("popup_area");
+                    if (parent === null) {
+                        parent = document.createElement('div');
+                        parent.setAttribute('id', 'popup');
+                        document.body.appendChild(parent);
+                    }
+                    if (target === null) {
+                        target = document.createElement('div');
+                        target.setAttribute('id', 'popup_area');
+                        parent.appendChild(target);
+                    }
+
+                    target.innerHTML = "<div id='temp_left'></div><div id='temp_right'></div>" + "<p>" + message + "</p>";
+                    parent.style.display = "block";
+                    target.addEventListener("click", function(event) {
+                        event.stopPropagation();
+                    });
+                    parent.addEventListener("click", function(event) {
+                        _this.disappear();
+                    });
+                    setTimeout("disappear()", time);
+                }
+            };
+
+            function disappear() {
+                var parent = document.getElementById("popup");
+                parent.style.display = "none";
+            };
+            return {
+                show: show,
+                disappear: disappear
+            }
+        })();
+
+        $('#system_submit').click(function() {
+            var system = {
+                "systemName": $('#system_name').val(),
+                "systemDescription": $("#system_description").val()
+            };
+            $.ajax({
+                type: 'post',
+                url: '/system/1/new_system',
+                dataType: 'json',
+                data: JSON.stringify(system),
+                contentType: 'application/json',
+                success: function(data) {
+                    if (data['status'] == 2000) {
+
+                        Popup.show(true, "新增系统成功", 500000);
+
+                    } else {
+                        Popup.show(true, "新增系统失败", 500000);
+                    }
+                },
+                error: function() {
+                    Popup.show(true, "新增系统失败", 500000);
+                }
+            });
+        });
+    })();
+    </script>
+</body>
+
+</html>
